@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical" android:padding="5dip">
 
     <TextView
         android:id="@+id/mainTit_textView1"
@@ -97,6 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mainNW" />
+
             </RadioGroup>
             <!--
             <Button
@@ -105,6 +106,30 @@
                 android:layout_height="wrap_content"
                 android:text="Button" />
             -->
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/textView1MainMues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ConfMues" />
+
+                <TextView
+                    android:id="@+id/textView2MainMues"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 5" />
+
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/seekBarMain"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" android:padding="5px" android:max="59" android:progress="5"/>
 
             <TextView
                 android:id="@+id/textViewMainModo"
