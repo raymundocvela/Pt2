@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<resources>
+    <string name="hello">Hello World</string>
+    <string name="app_name">MobileHunt</string>
+    <string name="sample_pref_click_pop_up">Click to pop up a list to choose from</string>
+    <string name="sample_pref_sel_dialog">Selection Dialog</string>
+    <string name="sample_pref_choose_number">Choose a number</string>
+    <string name="sample_pref_check_it">Check It</string>
+    <string name="sample_pref_add_prefs">Additional preferences</string>
+    <string name="sample_pref_categ_3">Preferences category 3</string>
+    <string name="sample_pref_categ_2">Preferences category 2</string>
+    <string name="sample_pref_categ_1">Preferences category 1</string>
+    <string name="sample_pref_summary">Preference Summary</string>
+    <string name="sample_pref_other_ckb">Another Checkbox</string>
+    <string name="sample_pref_other_screen">Another Preference Screen</string>
+    <string name="sample_pref_ckb">Checkbox Preference</string>
+    <string name="sample_pref_txt_dialog">Text Entry Dialog</string>
+    <string name="sample_pref_enter_txt">Enter something</string>
+    <string name="ConfActivityActivityLabel">Configuración</string>
+    <string-array name="numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+    <string-array name="numbernames">
+        <item>One</item>
+        <item>Two</item>
+        <item>Three</item>
+    </string-array>
+    <string name="bienv">BIENVENIDO</string>
+    <string name="bienvMsj">Este programa te permitirá registrar las coordenadas de este dispositivo, enviarlas a un servidor Web y consultarlas en cualquier explorador de Internet en Tiempo Real.\nAdicionalmente se podrán poner restricciones de localización, que al no ser atendidas, el dispositivo podrá ser apagado remotamente.</string>
+    <string name="pswSetTxt">Establecer contraseña de Administrador\n Debe contener sólo 4 números</string>
+    <string name="pswSetTit">ADMIN PSW</string>
+    <string name="pswSetHint">Ejemplo:1912</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="pswSetConf">confirma contraseña</string>
+    <string name="confUser">Nombre de Usuario</string>
+    <string name="confDesc">Descripción del Dispositivo</string>
+    <string name="confTit">Configuración</string>
+    <string name="ConfMues">Tiempo de muestreo (Localización): </string>
+    <string name="confComp">Compañia</string>
+    <string name="pswGetTxt">Ingresa la contraseña de ADMINISTRADOR</string>
+    <string name="mainConf">-Configuración</string>
+    <string name="mainTit">Menu Principal</string>
+    <string name="mainAcer">-Acerca de</string>
+    <string name="mainPos">Mi Localización</string>
+    <string name="acerTit">Acerca de</string>
+    <string name="acerTxt">Esta aplicación se implemento y diseño en el año 2012 con el fin de la aprobación del Proyecto Terminal 2 de la Carrera de Ingeniería en Computación UAM Azcapotzalco.\nComentarios:\nraymundoc.vela@hotmail.com\n Jorge Raymundo Castillo Velázquez</string>
+    <string name="mainBestp">Mejor Proveedor</string>
+    <string name="confReadEdit">Editar</string>
+    <string name="mainPsw">-Cambiar contraseña</string>
+    <string name="confDelPrefs">Eliminar Preferencias</string>
+    <string name="mainGps">GPS</string>
+    <string name="mainNW">Basada en la red</string>
+    <string name="mainPie">A pie</string>
+    <string name="mainAuto">En auto</string>
+    <string name="mainModo">Modo de traslado</string>
+</resources>
