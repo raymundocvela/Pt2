@@ -1,3 +1,8 @@
+
+/*
+ * Establecera la configuración inicial del dispositivo
+ * y la mandará al ws
+ */
 package net.igconsultores.raymundo.pt2;
 
 import java.io.BufferedReader;
@@ -34,6 +39,8 @@ public class ConfActivity extends Activity {
 	public int progresssb;
 	public String wsGetDataUrl="http://igconsultores.net/raymundo/wsgetdata.php";
 	public SharedPreferences prefs;
+	public String usr, usrUpdate,desc, descUpdate,inst, instUpdate;
+	
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
@@ -56,8 +63,12 @@ public class ConfActivity extends Activity {
 		tvMues.setText(progresssb +"min");
 		final Button btnAcep=(Button) findViewById(R.id.confAcep_button1);
 		
-		final 
-		String existUsr=prefs.getString("usr", "sin dato").toString();
+		final String existUsr=prefs.getString("usr", "sin dato").toString();
+		if(prefs.getBoolean("update", false)==true){
+			
+		}
+		
+		
 		if(!existUsr.equals("sin dato")){
 			etUsr.setText(prefs.getString("usr", "sin dato").toString());
 			etDesc.setText(prefs.getString("desc", "sin dato").toString());
@@ -106,6 +117,11 @@ public class ConfActivity extends Activity {
 					toast.show();
 				}
 				else{
+					//Si es una actualizacion
+
+					
+					
+					
 					SharedPreferences prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 					SharedPreferences.Editor editor =prefs.edit();
 					//Bundle bundle=getIntent().getExtras();

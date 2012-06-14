@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+
 public class ConfReadOnlyActivity extends Activity {
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
@@ -26,13 +27,12 @@ public class ConfReadOnlyActivity extends Activity {
 		final TextView tvTime=(TextView) findViewById(R.id.confRo_textView6time);
 		final Button btnEdit=(Button) findViewById(R.id.confRo_button1Edit);
 		final Button btnDelPrefs=(Button) findViewById(R.id.button1_confRo_DelPrefs);
-		
-		
 		final SharedPreferences prefs=getSharedPreferences("datos", Context.MODE_WORLD_WRITEABLE);
 		etUsr.setText(prefs.getString("usr", "sin dato").toString());
 		etDesc.setText(prefs.getString("desc", "sin dato").toString());
 		etComp.setText(prefs.getString("comp", "sin dato").toString());
 		tvTime.setText(prefs.getInt(Constantes.keyMuestreo, 0)+"min");
+		
 		
 		//tvTime.setText(prefs.getString("mues", null));
 		/*
@@ -45,6 +45,7 @@ public class ConfReadOnlyActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				prefs.edit().putBoolean("update", true);
 				finish();
 				Intent intConfW=new Intent(ConfReadOnlyActivity.this,ConfActivity.class);
 				startActivity(intConfW);

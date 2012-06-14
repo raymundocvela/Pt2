@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -16,6 +17,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -27,6 +29,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CompoundButton;
@@ -423,9 +426,50 @@ public class MainActivity extends Activity {
 				startActivity(intAcer);
 			}
 		});
+		
+
+		
 
 	}//Termina OnCreate
 
+	
+	//listener cuando el boton BACK sea presionado
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event)  {
+	    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
+	            && keyCode == KeyEvent.KEYCODE_BACK
+	            && event.getRepeatCount() == 0) {
+	        // Take care of calling this method on earlier versions of
+	        // the platform where it doesn't exist.
+	        onBackPressed();
+	    }
+
+	    return super.onKeyDown(keyCode, event);
+	}
+	
+	@Override
+	public void onBackPressed() {
+	   Log.d("Back", "onBackPressed Called");
+	   AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Salir de la aplicación?\n**Puedes presionar el botón \"HOME\" para cambiar de aplicación")
+		.setCancelable(false)
+		.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) {
+				finish();
+				//Toast.makeText(this, "Presiona la tecla de atrás para volver a la aplicación MobileHunt", Toast.LENGTH_LONG).show();
+			}
+		})
+		.setNegativeButton("No", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int id) { 
+				dialog.cancel();
+			}
+		});
+		AlertDialog alertDialog = builder.create();
+		alertDialog.show();
+	}
 	
 
 	//Habilita GPS
