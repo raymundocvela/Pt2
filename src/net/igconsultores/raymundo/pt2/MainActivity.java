@@ -27,6 +27,7 @@ import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -59,6 +60,7 @@ public class MainActivity extends Activity {
 	public String lastSendTime;
 	public String modoTraslado;
 	public String LocManProvider;
+	MediaPlayer mp;
 
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
@@ -82,6 +84,8 @@ public class MainActivity extends Activity {
 		final RadioButton rBtnAuto=(RadioButton) findViewById(R.id.radioMainAuto);
 		prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 		locMana=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
+		mp=MediaPlayer.create(MainActivity.this, R.raw.alert);
+
 		//Listener Localizacion
 		locList=new LocationListener() {
 			@Override
@@ -374,11 +378,13 @@ public class MainActivity extends Activity {
 					String usr=prefs.getString("usr", "sin dato");
 					String timeStamp=String.valueOf(locationMobile.getTime());
 					Log.e("sendData",usr+"/"+ lastLonx+"/"+lastLaty+"/"+ timeStamp+"/"+bestProv);
-					responsePhp=sendLoc(usr,  lastLaty,lastLonx, timeStamp, bestProv);
+					responsePhp=sendLoc(usr,lastLonx,lastLaty,timeStamp, bestProv);
 					Log.e("responsePhp",responsePhp);
 					if(responsePhp.contains("_1")){
 						Log.d("ws"," loc insertada"+responsePhp);
 						
+						if(responsePhp.contains("out")&!mp.isPlaying())
+							mp.start();
 						prefs.edit().putString("lastSendLonx",lastLonx).commit();
 						prefs.edit().putString("lastSendLaty",lastLaty).commit();
 						cont=0;
