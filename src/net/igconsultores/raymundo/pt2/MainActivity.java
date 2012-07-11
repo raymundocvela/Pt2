@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -116,13 +117,20 @@ public class MainActivity extends Activity {
 				//mostrarLocalizacion(location);
 				Log.e("listener", "Cambio de localizacion: "+location);
 				if(location!=null){	
-					String lonx = String.valueOf(location.getLatitude());
-					String laty= String.valueOf(location.getLongitude());
+					
+					DecimalFormat df=new DecimalFormat("0.00000");
+					String laty = String.valueOf(df.format(location.getLatitude()));
+					String lonx= String.valueOf(df.format(location.getLongitude()));
+					/*
+					String laty = String.valueOf(location.getLatitude());
+					String lonx= String.valueOf(location.getLongitude());
+					*/
 					String timeStamp=String.valueOf(location.getTime());
 					
+					
 					//imprimir datos en pantalla
-					tvLati.setText("Provedor:"+bestProv+"\nLatitud: " + lonx);
-					tvLong.setText("Longitud: " + laty);
+					tvLati.setText("Provedor:"+bestProv+"\nLatitud: " + laty);
+					tvLong.setText("Longitud: " + lonx);
 					tvPres.setText("Precision: " + String.valueOf(location.getAccuracy()));			
 					Date date=new Date(location.getTime());
 					tvTimes.setText("TimesStamp: "+ timeStamp+"\n"+"date: "+date.toString());
@@ -139,13 +147,13 @@ public class MainActivity extends Activity {
 						do{
 						String usr=prefs.getString("usr", "sin dato");							
 						bestProv= prefs.getString("bestProv", "sin dato");
-						Log.e("sendData",usr+"/"+ lonx+"/"+laty+"/"+ timeStamp+"/"+bestProv);
-						responsePhp=sendLoc(usr, lonx, laty, timeStamp, bestProv);
+						Log.e("sendData",usr+"/"+ laty+"/"+lonx+"/"+ timeStamp+"/"+bestProv);
+						responsePhp=sendLoc(usr, laty, lonx, timeStamp, bestProv);
 						Log.e("responsePhp",responsePhp);
 						if(responsePhp.contains("_1")){
 							Log.d("ws"," loc insertada "+responsePhp);
-//							prefs.edit().putString("lastSendLonx",lonx).commit();
-//							prefs.edit().putString("lastSendLaty",laty).commit();
+//							prefs.edit().putString("lastSendLonx",laty).commit();
+//							prefs.edit().putString("lastSendLaty",lonx).commit();
 							prefs.edit().putString("lastSendTime",timeStamp).commit();
 							cont=0;
 							}
@@ -171,10 +179,7 @@ public class MainActivity extends Activity {
 			minTime=prefs.getInt(Constantes.keyMuestreo, 0);
 			minDistancia=minTime*50;
 			//prefs.edit().putString("modoTras",modoTraslado).commit();
-			Log.d("traslado:", "Obtenido "+modoTraslado);
-			
-			
-			
+			Log.d("traslado:", "Obtenido "+modoTraslado);	
 		}
 		else {
 			rBtnAuto.setChecked(true);
@@ -377,14 +382,16 @@ public class MainActivity extends Activity {
 					
 					String usr=prefs.getString("usr", "sin dato");
 					String timeStamp=String.valueOf(locationMobile.getTime());
-					Log.e("sendData",usr+"/"+ lastLonx+"/"+lastLaty+"/"+ timeStamp+"/"+bestProv);
-					responsePhp=sendLoc(usr,lastLonx,lastLaty,timeStamp, bestProv);
+					Log.e("sendData",usr+"/"+ lastLaty+"/"+lastLonx+"/"+ timeStamp+"/"+bestProv);
+					responsePhp=sendLoc(usr,lastLaty,lastLonx,timeStamp, bestProv);
 					Log.e("responsePhp",responsePhp);
 					if(responsePhp.contains("_1")){
 						Log.d("ws"," loc insertada"+responsePhp);
 						
-						if(responsePhp.contains("out")&!mp.isPlaying())
-							mp.start();
+						//En desarrollo
+						//if(responsePhp.contains("out")&!mp.isPlaying())
+						//	mp.start(); 
+						
 						prefs.edit().putString("lastSendLonx",lastLonx).commit();
 						prefs.edit().putString("lastSendLaty",lastLaty).commit();
 						cont=0;
@@ -522,17 +529,17 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 }	
 	 */
 
-	public String sendLoc(String usr, String lonx, String laty, String timeStamp, String bestProv){
+	public String sendLoc(String usr, String laty, String lonx, String timeStamp, String bestProv){
 		HttpClient httpClient= new DefaultHttpClient();
 		HttpPost httpPost=new HttpPost(wsGetLocUrl);
 		InputStream is=null;
 		String responsePhp="";
 		try{
-			//Datos a enviar
+			//Datos a enviar			
 			List<NameValuePair> nvp= new ArrayList<NameValuePair>();
 			nvp.add(new BasicNameValuePair("usr", usr));
-			nvp.add(new BasicNameValuePair("lonx", lonx));
 			nvp.add(new BasicNameValuePair("laty", laty));
+			nvp.add(new BasicNameValuePair("lonx", lonx));
 			nvp.add(new BasicNameValuePair("timestamp", timeStamp));
 			nvp.add(new BasicNameValuePair("bestprov", bestProv));
 			
