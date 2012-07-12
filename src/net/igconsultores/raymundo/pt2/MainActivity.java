@@ -211,8 +211,8 @@ public class MainActivity extends Activity {
 					Log.d("locmana:", "eliminar update "+bestProv);
 					bestProv="GPS_PROVIDER";					
 //					LocManProvider=getLocManProvider(bestProv);
-					Log.d("if", "Gps esta habilitado?"+locMana.isProviderEnabled(bestProv));
-					if(!locMana.isProviderEnabled(bestProv)){
+					Log.d("if", "Gps esta habilitado?"+locMana.isProviderEnabled(LocationManager.GPS_PROVIDER));
+					if(!locMana.isProviderEnabled(LocationManager.GPS_PROVIDER)){
 						habGps();
 						Log.d("location", "GPS habilitado");
 						}	
