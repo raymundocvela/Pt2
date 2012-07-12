@@ -24,6 +24,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -127,6 +128,7 @@ public class ConfActivity extends Activity {
 					//Bundle bundle=getIntent().getExtras();
 					//String psw=bundle.getString("psw");
 					//editor.putInt("psw",Integer.parseInt(psw));
+//PONER ESTO EN EL IF 					
 					editor.putString("usr",usr);
 					editor.putString("desc",desc);
 					editor.putString("comp",comp);
@@ -145,8 +147,12 @@ public class ConfActivity extends Activity {
 						Intent intMain = new Intent(ConfActivity.this, MainActivity.class);
 						startActivity(intMain);	
 					}
-					else Log.d("responsePhp","usuario no insertado"+responsePhp);
-					
+					else{
+						etUsr.setBackgroundColor(Color.RED);
+						etUsr.requestFocus();
+						Toast.makeText(ConfActivity.this, "El nombre de usuario "+usr+" ya existe, intenta con otro o revisa tu conexión de internet ", Toast.LENGTH_LONG).show();
+						Log.d("responsePhp","usuario no insertado"+responsePhp);
+					}
 					
 				}
 
