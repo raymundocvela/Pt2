@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -117,10 +118,16 @@ public class MainActivity extends Activity {
 				//mostrarLocalizacion(location);
 				Log.e("listener", "Cambio de localizacion: "+location);
 				if(location!=null){	
-					
-					DecimalFormat df=new DecimalFormat("0.00000");
+					DecimalFormatSymbols dfs=new DecimalFormatSymbols();
+					dfs.setDecimalSeparator('.');
+					DecimalFormat df=new DecimalFormat("0.00000",dfs);
+					/*
 					String laty = String.valueOf(df.format(location.getLatitude()));
 					String lonx= String.valueOf(df.format(location.getLongitude()));
+					*/
+					String laty = df.format(location.getLatitude());
+					String lonx= df.format(location.getLongitude());
+
 					/*
 					String laty = String.valueOf(location.getLatitude());
 					String lonx= String.valueOf(location.getLongitude());
@@ -542,6 +549,7 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			nvp.add(new BasicNameValuePair("lonx", lonx));
 			nvp.add(new BasicNameValuePair("timestamp", timeStamp));
 			nvp.add(new BasicNameValuePair("bestprov", bestProv));
+			
 			
 			httpPost.setEntity(new UrlEncodedFormEntity(nvp));
 			
