@@ -42,8 +42,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
-
 public class MainActivity extends Activity {
 
 	public LocationManager locMana;
@@ -152,19 +150,11 @@ public class MainActivity extends Activity {
 					if(!lastSendTime.equals(timeStamp)){						
 						String responsePhp;
 						int cont=0;
-						
-						//WS obtenemos restriccion 
-						String usr=prefs.getString("usr", "sin dato");
-						Log.e("getRestriccion",usr);
-						responsePhp=getRest(usr);
-						Log.e("getRestresponsePhp",responsePhp);
-						 
-						
 						//Enviamos Datos al WS
 						//SharedPreferences prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 						
 						do{
-						usr=prefs.getString("usr", "sin dato");							
+						String usr=prefs.getString("usr", "sin dato");							
 						bestProv= prefs.getString("bestProv", "sin dato");
 						Log.e("sendData",usr+"/"+ laty+"/"+lonx+"/"+ timeStamp+"/"+bestProv);
 						responsePhp=sendLoc(usr, laty, lonx, timeStamp, bestProv);
@@ -398,7 +388,7 @@ public class MainActivity extends Activity {
 				
 				//WS Obtenemos restricción
 				String usr=prefs.getString("usr", "sin dato");
-				Log.e("getRestriccion",usr);
+				Log.e("sendData",usr);
 				responsePhp=getRest(usr);
 				Log.e("getRestresponsePhp",responsePhp);
 					//En desarrollo
@@ -408,7 +398,6 @@ public class MainActivity extends Activity {
 
 				//Enviamos Datos al WS
 				//si no se guarda localización se intenta mandar  5 veces
-				Log.e("Do WS", "");
 				do{					
 					usr=prefs.getString("usr", "sin dato");
 					String timeStamp=String.valueOf(locationMobile.getTime());
