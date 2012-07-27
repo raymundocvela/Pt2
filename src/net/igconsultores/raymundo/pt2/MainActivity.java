@@ -53,9 +53,7 @@ public class MainActivity extends Activity {
 	public int minDistancia=500;//en metros
 	public Context context;
 	public String bestProv;
-	public String wsGetRestUrl="http://igconsultores.net/raymundo/wssendrest.php";
 	public String wsGetLocUrl="http://igconsultores.net/raymundo/wsgetloc.php";
-	
 	public String lastLonx;
 	public String lastLaty;
 	public String lastTime;
@@ -385,21 +383,11 @@ public class MainActivity extends Activity {
 			if(!lastTime.equals(lastSendTime)){
 				String responsePhp;
 				int cont=0;
-				
-				//WS Obtenemos restricción
-				String usr=prefs.getString("usr", "sin dato");
-				Log.e("sendData",usr);
-				responsePhp=getRest(usr);
-				Log.e("getRestresponsePhp",responsePhp);
-					//En desarrollo
-					//if(responsePhp.contains("out")&!mp.isPlaying())
-					//	mp.start(); 
-					
-
 				//Enviamos Datos al WS
 				//si no se guarda localización se intenta mandar  5 veces
-				do{					
-					usr=prefs.getString("usr", "sin dato");
+				do{
+					
+					String usr=prefs.getString("usr", "sin dato");
 					String timeStamp=String.valueOf(locationMobile.getTime());
 					Log.e("sendData",usr+"/"+ lastLaty+"/"+lastLonx+"/"+ timeStamp+"/"+bestProv);
 					responsePhp=sendLoc(usr,lastLaty,lastLonx,timeStamp, bestProv);
@@ -548,58 +536,6 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 }	
 	 */
 
-	
-	public String getRest(String usr){
-		HttpClient httpClient= new DefaultHttpClient();
-		HttpPost httpPost=new HttpPost(wsGetRestUrl);
-		InputStream is=null;
-		String responsePhp="";
-		try{
-			//Datos a enviar			
-			List<NameValuePair> nvp= new ArrayList<NameValuePair>();
-			nvp.add(new BasicNameValuePair("usr", usr));
-		
-			httpPost.setEntity(new UrlEncodedFormEntity(nvp));
-			
-			//Si responde, ejecutamos
-			HttpResponse httpResponse=httpClient.execute(httpPost);
-			//obtenemos respuesta
-			HttpEntity httpEntity=httpResponse.getEntity();
-			is=httpEntity.getContent();
-						
-		}catch (ClientProtocolException e) {
-Log.e("webservice","ClientProtocol"+e.toString());			// TODO: handle exception
-Toast toast = Toast.makeText(MainActivity.this, "webservice ClientProtocol"+e.toString(),Toast.LENGTH_LONG);
-toast.show();
-		}catch (IOException e) {
-			// TODO: handle exception
-Log.e("webservice","ioException"+e.toString());
-Toast toast = Toast.makeText(MainActivity.this, "webservice ioException"+e.toString(),Toast.LENGTH_LONG);
-toast.show();
-		}
-		
-		//convertimos respuesta a string
-		try{
-			BufferedReader bf=new BufferedReader
-					(new InputStreamReader(is,"iso-8859-1"),8);
-			StringBuilder sb=new StringBuilder();
-			String line=null;
-			while((line=bf.readLine())!=null){
-				sb.append(line+"\n");
-			}
-			is.close();
-			responsePhp=sb.toString();
-		}catch (Exception e) {
-			// TODO: handle exception
-Log.e("responsePhp",e.toString());
-Toast toast = Toast.makeText(MainActivity.this, "response"+e.toString(),Toast.LENGTH_LONG);
-toast.show();
-		}
-		return responsePhp;
-	}
-	
-	
-	
 	public String sendLoc(String usr, String laty, String lonx, String timeStamp, String bestProv){
 		HttpClient httpClient= new DefaultHttpClient();
 		HttpPost httpPost=new HttpPost(wsGetLocUrl);
