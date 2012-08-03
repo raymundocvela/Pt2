@@ -589,6 +589,15 @@ toast.show();
 		}
 		return responsePhp;
 	}
+	
+	
+	
+	public String contain (String laty, String lonx){
+		String response="";
+		
+		
+		return response;
+	}
 
 
 
