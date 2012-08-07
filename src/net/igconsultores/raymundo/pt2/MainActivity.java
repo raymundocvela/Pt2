@@ -123,6 +123,10 @@ public class MainActivity extends Activity {
 				//mostrarLocalizacion(location);
 				Log.e("listener", "Cambio de localizacion: "+location);
 				if(location!=null){	
+					/**
+					 *laty y lonx vienen con COMA en ligar de punto, por lo que se
+					 * cambia el formato del número y se pide se trunque a 5 decimales
+					 */
 					DecimalFormatSymbols dfs=new DecimalFormatSymbols();
 					dfs.setDecimalSeparator('.');
 					DecimalFormat df=new DecimalFormat("0.00000",dfs);
