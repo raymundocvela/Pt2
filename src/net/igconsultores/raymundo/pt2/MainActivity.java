@@ -20,6 +20,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import com.exercise.AndroidHTML.AndroidHTMLActivity;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -35,6 +37,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
@@ -84,6 +87,8 @@ public class MainActivity extends Activity {
 		final RadioButton rBtnNw=(RadioButton) findViewById(R.id.radio1MainNw);
 		final RadioButton rBtnPie=(RadioButton) findViewById(R.id.radioMainPie);
 		final RadioButton rBtnAuto=(RadioButton) findViewById(R.id.radioMainAuto);
+		final WebView wviewContain=(WebView) findViewById(R.id.webViewMainJs);
+		final MyJa
 		prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 		locMana=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		mp=MediaPlayer.create(MainActivity.this, R.raw.alert);
@@ -599,6 +604,25 @@ toast.show();
 		return response;
 	}
 
+	public class MyJavaScriptInterface {
+		Context mContext;
 
+	    MyJavaScriptInterface(Context c) {
+	        mContext = c;
+	    }
+	    
+	    public void showToast(String toast){
+	        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+	    }
+	    
+	    public void openAndroidDialog(){
+	    	AlertDialog.Builder myDialog = new AlertDialog.Builder(AndroidHTMLActivity.this);
+	    	myDialog.setTitle("DANGER!");
+	    	myDialog.setMessage("You can do what you want!");
+	    	myDialog.setPositiveButton("ON", null);
+	    	myDialog.show();
+	    }
+
+	}
 
 }//termina

@@ -44,7 +44,7 @@ public final class R {
         public static final int confTit_textView1=0x7f080005;
         public static final int confUsr_editText1=0x7f080009;
         public static final int confUsr_textView2=0x7f080008;
-        public static final int imageView1=0x7f08003b;
+        public static final int imageView1=0x7f08003c;
         public static final int linearLayout1=0x7f080007;
         public static final int linearLayout2=0x7f080013;
         public static final int linearLayout3=0x7f08000f;
@@ -53,17 +53,17 @@ public final class R {
         public static final int mainConf_textView2=0x7f080022;
         public static final int mainPos_textView3=0x7f080023;
         public static final int mainTit_textView1=0x7f080021;
-        public static final int pswGetAcep_button1=0x7f080033;
-        public static final int pswGetTit_textView1=0x7f080030;
-        public static final int pswGetTxt_textView2=0x7f080031;
-        public static final int pswGet_editText1=0x7f080032;
-        public static final int pswSetConf_textView3=0x7f080037;
-        public static final int pswSetCont_button1=0x7f080039;
-        public static final int pswSetTit_textView1=0x7f080034;
-        public static final int pswSetTxt_textView2=0x7f080035;
-        public static final int pswSet_editText1=0x7f080036;
-        public static final int pswSet_editText2=0x7f080038;
-        public static final int pswSet_linearLayout1=0x7f08003a;
+        public static final int pswGetAcep_button1=0x7f080034;
+        public static final int pswGetTit_textView1=0x7f080031;
+        public static final int pswGetTxt_textView2=0x7f080032;
+        public static final int pswGet_editText1=0x7f080033;
+        public static final int pswSetConf_textView3=0x7f080038;
+        public static final int pswSetCont_button1=0x7f08003a;
+        public static final int pswSetTit_textView1=0x7f080035;
+        public static final int pswSetTxt_textView2=0x7f080036;
+        public static final int pswSet_editText1=0x7f080037;
+        public static final int pswSet_editText2=0x7f080039;
+        public static final int pswSet_linearLayout1=0x7f08003b;
         public static final int radio0MainGps=0x7f080029;
         public static final int radio1MainNw=0x7f08002a;
         public static final int radioGroup1MainLoc=0x7f080028;
@@ -79,6 +79,7 @@ public final class R {
         public static final int textView2MainTimes=0x7f080027;
         public static final int textView4MainLongTxt=0x7f080025;
         public static final int textViewMainModo=0x7f08002b;
+        public static final int webViewMainJs=0x7f080030;
     }
     public static final class layout {
         public static final int acer=0x7f030000;

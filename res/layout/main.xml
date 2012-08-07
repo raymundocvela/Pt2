@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
-
+   
     <TextView
         android:id="@+id/mainTit_textView1"
         android:layout_width="wrap_content"
@@ -152,6 +152,14 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="20sp" />
 -->
+				<WebView
+                
+                android:id="@+id/webViewMainJs"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                <!--android:visibility="gone"--> 
+                />
+
         </LinearLayout>
     </ScrollView>
 
