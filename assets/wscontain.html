@@ -1,33 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width; user-scalable=0;" />
     <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=true" type="text/javascript"></script>
-</head>
-<body>
-    <?php
-        include('conectar.php');
-        $usr=$_REQUEST['usr'];
-        $inOut="";
-        echo $usr;
-        //obtener id usr
-        $qUsr="SELECT idusuarios FROM usuarios WHERE usuario='$usr'";
-        echo "<br>".$qUsr;
-        $result=mysql_query($qUsr);
-        $idUsr=mysql_fetch_array($result);
-        //obtenemos restricción
-        $query="SELECT restriccion FROM usuarios WHERE idusuarios ='".$idUsr[0]."'";
-        echo "<br>".$query;
-        $result=mysql_query($query);
-        $row=mysql_fetch_array($result);
+            $inOut="";
+
         if($row[0]!=NULL){
             //Si hay restriccion de área
-            $js=$row[0];
-            echo "<br>restricción: ".$js."fin";
             $laty=$_REQUEST['laty'];
             $lonx=$_REQUEST['lonx'];
             //Crea el poligono
-            echo '
             <script type="text/javascript">
             var inOut="out";
             var punto= new google.maps.LatLng('.$laty.','.$lonx.');
@@ -46,6 +29,11 @@
         else "no hay restricción de área";
         echo "<br>inout var PHP?:".$inOut."-";
         mysql_close();
-    ?>
+</head>
+<body>
+
+
+
     </body>
-    
+</html>
+ 

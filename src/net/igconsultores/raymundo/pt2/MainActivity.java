@@ -19,9 +19,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-
-import com.exercise.AndroidHTML.AndroidHTMLActivity;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
