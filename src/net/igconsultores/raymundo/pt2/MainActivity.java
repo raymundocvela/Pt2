@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
 		final RadioButton rBtnPie=(RadioButton) findViewById(R.id.radioMainPie);
 		final RadioButton rBtnAuto=(RadioButton) findViewById(R.id.radioMainAuto);
 		final WebView wviewContain=(WebView) findViewById(R.id.webViewMainJs);
-		final MyJa
+		final JavaScriptInterface jsi = new JavaScriptInterface(this);
 		prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 		locMana=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		mp=MediaPlayer.create(MainActivity.this, R.raw.alert);
@@ -96,8 +96,7 @@ public class MainActivity extends Activity {
 			public void onStatusChanged(String provider, int status, Bundle extras) {
 				// TODO Auto-generated method stub
 				Toast toast = Toast.makeText(MainActivity.this, "SatusChanged "+provider+"."+status,Toast.LENGTH_LONG);
-				toast.show();
-				
+				toast.show();				
 			}
 
 			@Override
@@ -110,6 +109,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onProviderDisabled(String provider) {
 				// TODO Auto-generated method stub
+				habGps();
 				Toast toast = Toast.makeText(MainActivity.this, "ProviderDisabled "+provider,Toast.LENGTH_LONG);
 				toast.show();
 			}
@@ -121,7 +121,7 @@ public class MainActivity extends Activity {
 				Log.e("listener", "Cambio de localizacion: "+location);
 				if(location!=null){	
 					/**
-					 *laty y lonx vienen con COMA en ligar de punto, por lo que se
+					 *laty y lonx vienen con COMA en lugar de punto, por lo que se
 					 * cambia el formato del número y se pide se trunque a 5 decimales
 					 */
 					DecimalFormatSymbols dfs=new DecimalFormatSymbols();
@@ -381,18 +381,16 @@ public class MainActivity extends Activity {
 			lastSendTime=prefs.getString("lastSendTime", "0");
 			
 			Log.e("lastSendTime",prefs.getString("lastSendTime", "0"));
-//				Log.e("lastSendLaty",prefs.getString("lastSendLaty", "0"));
+//Log.e("lastSendLaty",prefs.getString("lastSendLaty", "0"));
 //Log.e("lastSendLonx",prefs.getString("lastSendLonx", "0"));
 
-			//Comprobamos si la ultima localización conocida ya fue guardada
-			
+			//Comprobamos si la ultima localización conocida ya fue guardada			
 			if(!lastTime.equals(lastSendTime)){
 				String responsePhp;
 				int cont=0;
 				//Enviamos Datos al WS
 				//si no se guarda localización se intenta mandar  5 veces
-				do{
-					
+				do{					
 					String usr=prefs.getString("usr", "sin dato");
 					String timeStamp=String.valueOf(locationMobile.getTime());
 					Log.e("sendData",usr+"/"+ lastLaty+"/"+lastLonx+"/"+ timeStamp+"/"+bestProv);
@@ -605,10 +603,10 @@ toast.show();
 		return response;
 	}
 
-	public class MyJavaScriptInterface {
+	public class JavaScriptInterface {
 		Context mContext;
 
-	    MyJavaScriptInterface(Context c) {
+	    JavaScriptInterface(Context c) {
 	        mContext = c;
 	    }
 	    
