@@ -628,15 +628,17 @@ toast.show();
 			
 			wViewContain.setWebViewClient(new WebViewClient(){
 				public void onPageFinished(WebView view, String url){
+					Log.v("inyección","Pagina cargada, Inicio JS");
 					wViewContain.loadUrl("javascript:"+jsRest);
 					wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
 					wViewContain.loadUrl("javascript: iniciar()");
 				}
 			});
 			wViewContain.loadUrl(wViewContainUrl);
-			
+			Log.v("inyección","Fin JS");
 		}
 		else Log.v("Sin Restricción","Sin restricción de área var jsRest="+jsRest);
+		Log.v("Contain","fin función contain");
 	}
 	
 	
