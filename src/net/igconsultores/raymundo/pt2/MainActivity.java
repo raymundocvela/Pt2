@@ -616,6 +616,9 @@ toast.show();
 	//Inyección de código JavaScript a wscontainandroid.html
 	public void contain (final String laty, final String lonx, String responsePhp){
 		final String jsRest=responsePhp.substring(4, responsePhp.length());
+		jsRest.replace("(\\r\\n|\\n|\\r)"," ");
+		jsRest.replace("(\r\n|\n|\r)"," ");
+		
 		if (jsRest.length()>0){
 			Log.v("Restricción","Restricción de área var jsRest="+jsRest+"\n");
 			Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
