@@ -181,7 +181,7 @@ public class MainActivity extends Activity {
 						
 						//Verificamos si la localización o punto está dentro del poligono o restricción
 						contain(lastLaty, lastLonx, responsePhp);
-						Log.v("contain","La restricción contiene a la localización?"+wsContainPto);
+						Log.v("contain","La restricción contiene a la localización?:"+wsContainPto);
 						if(wsContainPto.contains("out")){
 							mp.start();
 						}
@@ -423,7 +423,7 @@ public class MainActivity extends Activity {
 				}while(!responsePhp.contains("_1")&&cont<5);
 				
 				//Verificamos si la localización o punto está dentro del poligono o restricción				
-				Log.v("var wsContainPto","valor iniciarl variable "+ wsContainPto);
+				Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
 				contain(lastLaty, lastLonx, responsePhp);
 				Log.v("contain","La restricción contiene a la localización?"+wsContainPto);
 				if(wsContainPto.contains("out")){
@@ -603,9 +603,9 @@ toast.show();
 			responsePhp=sb.toString();
 		}catch (Exception e) {
 			// TODO: handle exception
-Log.e("responsePhp",e.toString());
-Toast toast = Toast.makeText(MainActivity.this, "response"+e.toString(),Toast.LENGTH_LONG);
-toast.show();
+			Log.e("responsePhp",e.toString());
+			Toast toast = Toast.makeText(MainActivity.this, "response"+e.toString(),Toast.LENGTH_LONG);
+			toast.show();
 		}
 		return responsePhp;
 	}
@@ -634,7 +634,7 @@ toast.show();
 			wViewContain.loadUrl(wViewContainUrl);
 			
 		}
-		else Log.v("Sin Restricción","Sin restricción de área car jsRest="+jsRest);
+		else Log.v("Sin Restricción","Sin restricción de área var jsRest="+jsRest);
 	}
 	
 	
