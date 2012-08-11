@@ -615,7 +615,7 @@ toast.show();
 	
 	//Inyección de código JavaScript a wscontainandroid.html
 	public void contain (final String laty, final String lonx, String responsePhp){
-		final String jsRest=responsePhp.substring(2, responsePhp.length());
+		final String jsRest=responsePhp.substring(4, responsePhp.length());
 		if (jsRest.length()>0){
 			Log.v("Restricción","Restricción de área var jsRest="+jsRest+"\n");
 			Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
@@ -626,15 +626,20 @@ toast.show();
 			wViewContain.addJavascriptInterface(jsi, "androidFunction");
 			wViewContain.getSettings().setJavaScriptEnabled(true);
 			
-			wViewContain.setWebViewClient(new WebViewClient(){
+/*			wViewContain.setWebViewClient(new WebViewClient(){
 				public void onPageFinished(WebView view, String url){
 					Log.v("inyección","Pagina cargada, Inicio JS");
 					wViewContain.loadUrl("javascript:"+jsRest);
 					wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
 					wViewContain.loadUrl("javascript: iniciar()");
 				}
-			});
+			});			
+*/
 			wViewContain.loadUrl(wViewContainUrl);
+			Log.v("inyección","Pagina cargada, Inicio JS");
+			wViewContain.loadUrl("javascript:"+jsRest);
+			wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
+			wViewContain.loadUrl("javascript: iniciar()");
 			Log.v("inyección","Fin JS");
 		}
 		else Log.v("Sin Restricción","Sin restricción de área var jsRest="+jsRest);

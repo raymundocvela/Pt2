@@ -8,10 +8,10 @@
         function iniciar(){
         	var poligono = new google.maps.Polygon(polyOptions);
             if (google.maps.geometry.poly.containsLocation(punto,poligono)) {
-                document.getElementById("message").innerHTML = "The mouse is INSIDE the polygon."
+                document.getElementById("message").innerHTML = "The mouse is INSIDE the polygon.";
                 androidFunction.puntoIn();
             } else {            	
-                document.getElementById("message").innerHTML = "The mouse is outside the polygon."
+                document.getElementById("message").innerHTML = "The mouse is outside the polygon.";
                 androidFunction.puntoOut();
             }
         }
