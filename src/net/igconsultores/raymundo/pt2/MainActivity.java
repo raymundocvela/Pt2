@@ -615,9 +615,12 @@ toast.show();
 	
 	//Inyección de código JavaScript a wscontainandroid.html
 	public void contain (final String laty, final String lonx, String responsePhp){
-		final String jsRest=responsePhp.substring(4, responsePhp.length());
+		
+		String jsRest=responsePhp.substring(4, responsePhp.length());
 		jsRest.replace("(\\r\\n|\\n|\\r)"," ");
-		jsRest.replace("(\r\n|\n|\r)"," ");
+		jsRest.replaceAll("[\r\n|\n|\r]"," ");
+		
+		jsRest=noReturn(jsRest);
 		
 		if (jsRest.length()>0){
 			Log.v("Restricción","Restricción de área var jsRest="+jsRest+"\n");
@@ -649,6 +652,21 @@ toast.show();
 		Log.v("Contain","fin función contain");
 	}
 	
+	private String noReturn(String s){
+		String new_s = "";
+		if (s!=null){
+		int i = s.length(), j = 0;
+		while(j<i){
+		if(s.charAt(j)!='\n'&&s.charAt(j)!='\r'){
+		new_s = new_s + s.charAt(j);	
+		}else{
+		new_s = new_s + "";
+		}
+		j++;
+		}
+		}
+		return new_s;
+		}
 	
 	
 	public class JavaScriptInterface {
