@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onProviderDisabled(String provider) {
 				// TODO Auto-generated method stub
-				habGps();
+				//habGps();
 				Toast toast = Toast.makeText(MainActivity.this, "ProviderDisabled "+provider,Toast.LENGTH_LONG);
 				toast.show();
 			}
@@ -152,7 +152,7 @@ public class MainActivity extends Activity {
 
 					//verificar q no se hayan insertado
 					lastSendTime=prefs.getString("lastSendTime", "0");
-					Log.e("if","Si lasSenTime:"+lastSendTime+"=="+timeStamp+" timestamp");
+					Log.e("if","Si lastSendTime:"+lastSendTime+"=="+timeStamp+" timestamp");
 					if(!lastSendTime.equals(timeStamp)){						
 						String responsePhp;
 						String usr=prefs.getString("usr", "sin dato");							
@@ -167,14 +167,14 @@ public class MainActivity extends Activity {
 						responsePhp=sendLoc(usr, laty, lonx, timeStamp, bestProv);
 						Log.e("responsePhp",responsePhp);
 						if(responsePhp.contains("_1")){
-							Log.d("ws"," loc insertada "+responsePhp);
+							Log.d("ws"," Loc insertada");
 //							prefs.edit().putString("lastSendLonx",laty).commit();
 //							prefs.edit().putString("lastSendLaty",lonx).commit();
 							prefs.edit().putString("lastSendTime",timeStamp).commit();
 							cont=0;
 							}
 						else {
-							Log.d("responsePhp","Loc no insertada"+responsePhp);
+							Log.d("responsePhp","Loc no insertada");
 							cont++;
 						}
 						}while(!responsePhp.contains("_1")&&cont<5);
@@ -185,6 +185,7 @@ public class MainActivity extends Activity {
 						if(wsContainPto.contains("out")){
 							mp.start();
 						}
+						Log.v("FIN","verificación COMPLETA");
 						
 					}
 					
@@ -410,7 +411,7 @@ public class MainActivity extends Activity {
 					responsePhp=sendLoc(usr,lastLaty,lastLonx,timeStamp, bestProv);
 					Log.e("responsePhp",responsePhp);
 					if(responsePhp.contains("_1")){
-						Log.d("ws"," loc insertada"+responsePhp);						
+						Log.d("ws"," Loc insertada");						
 						prefs.edit().putString("lastSendLonx",lastLonx).commit();
 						prefs.edit().putString("lastSendLaty",lastLaty).commit();
 						cont=0;
@@ -418,7 +419,7 @@ public class MainActivity extends Activity {
 					else{ 
 //Establecer timer para volver a intentar ingresar datos
 						cont++;
-						Log.d("responsePhp","Loc no insertada"+responsePhp);
+						Log.d("responsePhp","Loc no insertada");
 					}
 				}while(!responsePhp.contains("_1")&&cont<5);
 				
@@ -429,6 +430,7 @@ public class MainActivity extends Activity {
 				if(wsContainPto.contains("out")){
 					mp.start();
 				}
+				Log.v("FIN","verificación COMPLETA");
 			}
 		}
 		else Log.e("if LocMana", "NO Obtuve posición, locmana vacio");
@@ -611,11 +613,11 @@ toast.show();
 	}
 	
 	
-	//
+	//Inyección de código JavaScript a wscontainandroid.html
 	public void contain (final String laty, final String lonx, String responsePhp){
 		final String jsRest=responsePhp.substring(2, responsePhp.length());
 		if (jsRest.length()>0){
-			Log.v("Restricción","Restricción de área var jsRest="+jsRest);
+			Log.v("Restricción","Restricción de área var jsRest="+jsRest+"\n");
 			Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
 			wsContainPto="sin dato";
 			final WebView wViewContain=(WebView) findViewById(R.id.webViewMainJs);
@@ -647,10 +649,12 @@ toast.show();
 	    }
 	    
 	    public void puntoIn(){
+	    	Log.v("androidFuntion","puntoIn");
 	    	wsContainPto="in";    
 	    }
 	    
 	    public void puntoOut (){
+	    	Log.v("androidFuntion","puntoOut");
 	    	wsContainPto="out";
 	    }
 	}
