@@ -35,6 +35,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.RadioButton;
@@ -62,6 +63,8 @@ public class MainActivity extends Activity {
 	public String lastSendTime;
 	public String modoTraslado;
 	public String LocManProvider;
+	public String wViewContainUrl="file:///android_asset/wscontainandroid.html";
+	public String wsContainPto="";
 	MediaPlayer mp;
 
 	/**
@@ -84,8 +87,7 @@ public class MainActivity extends Activity {
 		final RadioButton rBtnNw=(RadioButton) findViewById(R.id.radio1MainNw);
 		final RadioButton rBtnPie=(RadioButton) findViewById(R.id.radioMainPie);
 		final RadioButton rBtnAuto=(RadioButton) findViewById(R.id.radioMainAuto);
-		final WebView wviewContain=(WebView) findViewById(R.id.webViewMainJs);
-		final JavaScriptInterface jsi = new JavaScriptInterface(this);
+		
 		prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 		locMana=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		mp=MediaPlayer.create(MainActivity.this, R.raw.alert);
@@ -153,13 +155,14 @@ public class MainActivity extends Activity {
 					Log.e("if","Si lasSenTime:"+lastSendTime+"=="+timeStamp+" timestamp");
 					if(!lastSendTime.equals(timeStamp)){						
 						String responsePhp;
-						int cont=0;
-						//Enviamos Datos al WS
-						//SharedPreferences prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
-						
-						do{
 						String usr=prefs.getString("usr", "sin dato");							
 						bestProv= prefs.getString("bestProv", "sin dato");
+						int cont=0;
+						
+						//Enviamos Datos al WS
+						//SharedPreferences prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
+						do{
+						
 						Log.e("sendData",usr+"/"+ laty+"/"+lonx+"/"+ timeStamp+"/"+bestProv);
 						responsePhp=sendLoc(usr, laty, lonx, timeStamp, bestProv);
 						Log.e("responsePhp",responsePhp);
@@ -175,7 +178,14 @@ public class MainActivity extends Activity {
 							cont++;
 						}
 						}while(!responsePhp.contains("_1")&&cont<5);
-					
+						
+						//Verificamos si la localización o punto está dentro del poligono o restricción
+						contain(lastLaty, lastLonx, responsePhp);
+						Log.v("contain","La restricción contiene a la localización?"+wsContainPto);
+						if(wsContainPto.contains("out")){
+							mp.start();
+						}
+						
 					}
 					
 				}
@@ -207,7 +217,10 @@ public class MainActivity extends Activity {
 		//provedor default
 		if(bestProv.equals("GPS_PROVIDER")){
 			rBtnGps.setChecked(true);
-			
+			if(!locMana.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+				habGps();
+				Log.d("location", "GPS habilitado");
+				}			
 		}
 		else {
 			rBtnNw.setChecked(true);
@@ -387,22 +400,17 @@ public class MainActivity extends Activity {
 			//Comprobamos si la ultima localización conocida ya fue guardada			
 			if(!lastTime.equals(lastSendTime)){
 				String responsePhp;
+				String usr=prefs.getString("usr", "sin dato");
+				String timeStamp=String.valueOf(locationMobile.getTime());
 				int cont=0;
 				//Enviamos Datos al WS
 				//si no se guarda localización se intenta mandar  5 veces
 				do{					
-					String usr=prefs.getString("usr", "sin dato");
-					String timeStamp=String.valueOf(locationMobile.getTime());
 					Log.e("sendData",usr+"/"+ lastLaty+"/"+lastLonx+"/"+ timeStamp+"/"+bestProv);
 					responsePhp=sendLoc(usr,lastLaty,lastLonx,timeStamp, bestProv);
 					Log.e("responsePhp",responsePhp);
 					if(responsePhp.contains("_1")){
-						Log.d("ws"," loc insertada"+responsePhp);
-						
-						//En desarrollo
-						//if(responsePhp.contains("out")&!mp.isPlaying())
-						//	mp.start(); 
-						
+						Log.d("ws"," loc insertada"+responsePhp);						
 						prefs.edit().putString("lastSendLonx",lastLonx).commit();
 						prefs.edit().putString("lastSendLaty",lastLaty).commit();
 						cont=0;
@@ -413,6 +421,14 @@ public class MainActivity extends Activity {
 						Log.d("responsePhp","Loc no insertada"+responsePhp);
 					}
 				}while(!responsePhp.contains("_1")&&cont<5);
+				
+				//Verificamos si la localización o punto está dentro del poligono o restricción				
+				Log.v("var wsContainPto","valor iniciarl variable "+ wsContainPto);
+				contain(lastLaty, lastLonx, responsePhp);
+				Log.v("contain","La restricción contiene a la localización?"+wsContainPto);
+				if(wsContainPto.contains("out")){
+					mp.start();
+				}
 			}
 		}
 		else Log.e("if LocMana", "NO Obtuve posición, locmana vacio");
@@ -595,14 +611,34 @@ toast.show();
 	}
 	
 	
-	
-	public String contain (String laty, String lonx){
-		String response="";
-		
-		
-		return response;
+	//
+	public void contain (final String laty, final String lonx, String responsePhp){
+		final String jsRest=responsePhp.substring(2, responsePhp.length());
+		if (jsRest.length()>0){
+			Log.v("Restricción","Restricción de área var jsRest="+jsRest);
+			Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
+			wsContainPto="sin dato";
+			final WebView wViewContain=(WebView) findViewById(R.id.webViewMainJs);
+			final JavaScriptInterface jsi = new JavaScriptInterface(this);
+			
+			wViewContain.addJavascriptInterface(jsi, "androidFunction");
+			wViewContain.getSettings().setJavaScriptEnabled(true);
+			
+			wViewContain.setWebViewClient(new WebViewClient(){
+				public void onPageFinished(WebView view, String url){
+					wViewContain.loadUrl("javascript:"+jsRest);
+					wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
+					wViewContain.loadUrl("javascript: iniciar()");
+				}
+			});
+			wViewContain.loadUrl(wViewContainUrl);
+			
+		}
+		else Log.v("Sin Restricción","Sin restricción de área car jsRest="+jsRest);
 	}
-
+	
+	
+	
 	public class JavaScriptInterface {
 		Context mContext;
 
@@ -610,18 +646,13 @@ toast.show();
 	        mContext = c;
 	    }
 	    
-	    public void showToast(String toast){
-	        Toast.makeText(mContext, toast, Toast.LENGTH_SHORT).show();
+	    public void puntoIn(){
+	    	wsContainPto="in";    
 	    }
 	    
-	    public void openAndroidDialog(){
-	    	AlertDialog.Builder myDialog = new AlertDialog.Builder(AndroidHTMLActivity.this);
-	    	myDialog.setTitle("DANGER!");
-	    	myDialog.setMessage("You can do what you want!");
-	    	myDialog.setPositiveButton("ON", null);
-	    	myDialog.show();
+	    public void puntoOut (){
+	    	wsContainPto="out";
 	    }
-
 	}
 
 }//termina

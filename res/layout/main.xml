@@ -152,13 +152,12 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="20sp" />
 -->
-				<WebView
-                
+				<WebView                
                 android:id="@+id/webViewMainJs"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                <!--android:visibility="gone"--> 
                 />
+				                <!--android:visibility="gone"--> 
 
         </LinearLayout>
     </ScrollView>
