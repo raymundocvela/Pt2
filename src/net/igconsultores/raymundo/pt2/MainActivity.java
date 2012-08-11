@@ -639,7 +639,7 @@ toast.show();
 			Log.v("inyección","Pagina cargada, Inicio JS");
 			wViewContain.loadUrl("javascript:"+jsRest);
 			wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
-			wViewContain.loadUrl("javascript: iniciar()");
+			wViewContain.loadUrl("javascript: iniciar();");
 			Log.v("inyección","Fin JS");
 		}
 		else Log.v("Sin Restricción","Sin restricción de área var jsRest="+jsRest);
