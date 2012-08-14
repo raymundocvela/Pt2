@@ -595,7 +595,9 @@ toast.show();
 		//convertimos respuesta a string
 		try{
 			BufferedReader bf=new BufferedReader
-					(new InputStreamReader(is,"iso-8859-1"),8);
+					//(new InputStreamReader(is,"iso-8859-1"),8);
+			(new InputStreamReader(is,"utf-8"),8);
+			
 			StringBuilder sb=new StringBuilder();
 			String line=null;
 			while((line=bf.readLine())!=null){
@@ -617,13 +619,10 @@ toast.show();
 	public void contain (final String laty, final String lonx, String responsePhp){
 		
 		String jsRest=responsePhp.substring(4, responsePhp.length());
-		jsRest.replace("(\\r\\n|\\n|\\r)"," ");
-		jsRest.replaceAll("[\r\n|\n|\r]"," ");
-		
-		jsRest=noReturn(jsRest);
-		
+		//jsRest=jsRest.replaceAll("(\\r|\\n)"," ");
+			
 		if (jsRest.length()>0){
-			Log.v("Restricción","Restricción de área var jsRest="+jsRest+"\n");
+			Log.v("Restricción","Restricción de área var jsRest="+jsRest+"\n---");
 			Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
 			wsContainPto="sin dato";
 			final WebView wViewContain=(WebView) findViewById(R.id.webViewMainJs);
@@ -643,31 +642,15 @@ toast.show();
 */
 			wViewContain.loadUrl(wViewContainUrl);
 			Log.v("inyección","Pagina cargada, Inicio JS");
-			wViewContain.loadUrl("javascript:"+jsRest);
+			wViewContain.loadUrl("javascript: "+jsRest);
 			wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
 			wViewContain.loadUrl("javascript: iniciar();");
+			//wViewContain.loadUrl("javascript:callFromActivity(\""+msgToSend+"\")");
 			Log.v("inyección","Fin JS");
 		}
 		else Log.v("Sin Restricción","Sin restricción de área var jsRest="+jsRest);
 		Log.v("Contain","fin función contain");
 	}
-	
-	private String noReturn(String s){
-		String new_s = "";
-		if (s!=null){
-		int i = s.length(), j = 0;
-		while(j<i){
-		if(s.charAt(j)!='\n'&&s.charAt(j)!='\r'){
-		new_s = new_s + s.charAt(j);	
-		}else{
-		new_s = new_s + "";
-		}
-		j++;
-		}
-		}
-		return new_s;
-		}
-	
 	
 	public class JavaScriptInterface {
 		Context mContext;
@@ -677,12 +660,12 @@ toast.show();
 	    }
 	    
 	    public void puntoIn(){
-	    	Log.v("androidFuntion","puntoIn");
+	    	Log.v("androidFunction","puntoIn");
 	    	wsContainPto="in";    
 	    }
 	    
 	    public void puntoOut (){
-	    	Log.v("androidFuntion","puntoOut");
+	    	Log.v("androidFunction","puntoOut");
 	    	wsContainPto="out";
 	    }
 	}

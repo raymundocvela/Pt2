@@ -5,17 +5,37 @@
 <script src="http://maps.googleapis.com/maps/api/js?libraries=geometry&sensor=true" type="text/javascript">
 </script>
 <script type="text/javascript">
+function callFromActivity(msg){
+	document.getElementById("message").innerHTML=msg;
+}
+
+
+
         function iniciar(){
-        	var poligono = new google.maps.Polygon(polyOptions);
-            if (google.maps.geometry.poly.containsLocation(punto,poligono)) {
-                document.getElementById("message").innerHTML = "The mouse is INSIDE the polygon.";
-                androidFunction.puntoIn();
-            } else {            	
-                document.getElementById("message").innerHTML = "The mouse is outside the polygon.";
-                androidFunction.puntoOut();
-            }
-        }
-       
+
+			var pts = [ new google.maps.LatLng(19.301403, -99.146976),
+						new google.maps.LatLng(19.295489, -99.155216),
+						new google.maps.LatLng(19.314930, -99.167575),
+						new google.maps.LatLng(19.314120, -99.150409)
+						];
+			var poligono = new google.maps.Polygon({
+						paths : pts,
+						strokeColor : "#FF0000",
+						strokeOpacity : 0.8,
+						strokeWeight : 2,
+						fillColor : "#FF0000",
+						fillOpacity : 0.35
+					});
+
+		var punto=new google.maps.LatLng(19.316, -99.159);	
+		if (google.maps.geometry.poly.containsLocation(punto, poligono)) {
+			document.getElementById("message").innerHTML = "The mouse is INSIDE the polygon.";
+			androidFunction.puntoIn();
+		} else {
+			document.getElementById("message").innerHTML = "The mouse is outside the polygon.";
+			androidFunction.puntoOut();
+		}
+	}
 </script>
 
 </head>
