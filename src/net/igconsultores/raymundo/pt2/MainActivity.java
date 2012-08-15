@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 
 	public LocationManager locMana;
 	public LocationListener locList;
-//	public BatteryManager batteryManager;
+	//	public BatteryManager batteryManager;
 	public Location locationMobile;
 	public SharedPreferences prefs;
 	public int minTime=0;
@@ -58,8 +58,8 @@ public class MainActivity extends Activity {
 	public String lastLonx;
 	public String lastLaty;
 	public String lastTime;
-//	public String lastSendLonx;
-//	public String lastSendLaty;
+	//	public String lastSendLonx;
+	//	public String lastSendLaty;
 	public String lastSendTime;
 	public String modoTraslado;
 	public String LocManProvider;
@@ -77,7 +77,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 
 		final TextView tvConf =(TextView) findViewById(R.id.mainConf_textView2);
-//		final TextView tvPos =(TextView) findViewById(R.id.mainPos_textView3);
+		//		final TextView tvPos =(TextView) findViewById(R.id.mainPos_textView3);
 		final TextView tvAcer =(TextView) findViewById(R.id.mainAcer_textView4);
 		final TextView tvLati =(TextView) findViewById(R.id.textView2MainLatiTxt);
 		final TextView tvLong =(TextView) findViewById(R.id.textView4MainLongTxt);
@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
 		final RadioButton rBtnNw=(RadioButton) findViewById(R.id.radio1MainNw);
 		final RadioButton rBtnPie=(RadioButton) findViewById(R.id.radioMainPie);
 		final RadioButton rBtnAuto=(RadioButton) findViewById(R.id.radioMainAuto);
-		
+
 		prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 		locMana=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		mp=MediaPlayer.create(MainActivity.this, R.raw.alert);
@@ -132,17 +132,17 @@ public class MainActivity extends Activity {
 					/*
 					String laty = String.valueOf(df.format(location.getLatitude()));
 					String lonx= String.valueOf(df.format(location.getLongitude()));
-					*/
+					 */
 					String laty = df.format(location.getLatitude());
 					String lonx= df.format(location.getLongitude());
 
 					/*
 					String laty = String.valueOf(location.getLatitude());
 					String lonx= String.valueOf(location.getLongitude());
-					*/
+					 */
 					String timeStamp=String.valueOf(location.getTime());
-					
-					
+
+
 					//imprimir datos en pantalla
 					tvLati.setText("Provedor:"+bestProv+"\nLatitud: " + laty);
 					tvLong.setText("Longitud: " + lonx);
@@ -158,27 +158,27 @@ public class MainActivity extends Activity {
 						String usr=prefs.getString("usr", "sin dato");							
 						bestProv= prefs.getString("bestProv", "sin dato");
 						int cont=0;
-						
+
 						//Enviamos Datos al WS
 						//SharedPreferences prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 						do{
-						
-						Log.e("sendData",usr+"/"+ laty+"/"+lonx+"/"+ timeStamp+"/"+bestProv);
-						responsePhp=sendLoc(usr, laty, lonx, timeStamp, bestProv);
-						Log.e("responsePhp",responsePhp);
-						if(responsePhp.contains("_1")){
-							Log.d("ws"," Loc insertada");
-//							prefs.edit().putString("lastSendLonx",laty).commit();
-//							prefs.edit().putString("lastSendLaty",lonx).commit();
-							prefs.edit().putString("lastSendTime",timeStamp).commit();
-							cont=0;
+
+							Log.e("sendData",usr+"/"+ laty+"/"+lonx+"/"+ timeStamp+"/"+bestProv);
+							responsePhp=sendLoc(usr, laty, lonx, timeStamp, bestProv);
+							Log.e("responsePhp",responsePhp);
+							if(responsePhp.contains("_1")){
+								Log.d("ws"," Loc insertada");
+								//							prefs.edit().putString("lastSendLonx",laty).commit();
+								//							prefs.edit().putString("lastSendLaty",lonx).commit();
+								prefs.edit().putString("lastSendTime",timeStamp).commit();
+								cont=0;
 							}
-						else {
-							Log.d("responsePhp","Loc no insertada");
-							cont++;
-						}
+							else {
+								Log.d("responsePhp","Loc no insertada");
+								cont++;
+							}
 						}while(!responsePhp.contains("_1")&&cont<5);
-						
+
 						//Verificamos si la localización o punto está dentro del poligono o restricción
 						prefs.edit().putString("responsePHP", responsePhp).commit();
 						contain(lastLaty, lastLonx);
@@ -187,14 +187,14 @@ public class MainActivity extends Activity {
 							mp.start();
 						}
 						Log.v("FIN","verificación COMPLETA");
-						
+
 					}
-					
+
 				}
 			}
 
 		};
-				
+
 		//Modo traslado default
 		bestProv=prefs.getString("bestProv","GPS_NETWORK");
 		modoTraslado=prefs.getString("modoTras","pie");
@@ -211,25 +211,25 @@ public class MainActivity extends Activity {
 			modoTraslado="auto";
 			minTime=prefs.getInt(Constantes.keyMuestreo, 0);
 			minDistancia=minTime*500;
-//			prefs.edit().putString("modoTras",modoTraslado).commit();
+			//			prefs.edit().putString("modoTras",modoTraslado).commit();
 			Log.d("traslado:", "Obtenido "+modoTraslado);
 		}
-		
-		
+
+
 		//provedor default
 		if(bestProv.equals("GPS_PROVIDER")){
 			rBtnGps.setChecked(true);
 			if(!locMana.isProviderEnabled(LocationManager.GPS_PROVIDER)){
 				habGps();
 				Log.d("location", "GPS habilitado");
-				}			
+			}			
 		}
 		else {
 			rBtnNw.setChecked(true);
 		}
-		
 
-				
+
+
 		//Listener Proveedor de localizacion Global
 		rBtnGps.setOnCheckedChangeListener(new OnCheckedChangeListener() {			
 			@Override
@@ -238,16 +238,16 @@ public class MainActivity extends Activity {
 				if (rBtnGps.isChecked()){
 					Log.d("locmana:", "eliminar update "+bestProv);
 					bestProv="GPS_PROVIDER";					
-//					LocManProvider=getLocManProvider(bestProv);
+					//					LocManProvider=getLocManProvider(bestProv);
 					Log.d("if", "Gps esta habilitado?"+locMana.isProviderEnabled(LocationManager.GPS_PROVIDER));
 					if(!locMana.isProviderEnabled(LocationManager.GPS_PROVIDER)){
 						habGps();
 						Log.d("location", "GPS habilitado");
-						}	
-					
+					}	
+
 					prefs.edit().putString("bestProv",bestProv).commit();
 					Log.d("Mejor Proveedor:", "Guardado "+bestProv);
-								
+
 					//eliminar actualizacion anterior al LocList
 					locMana.removeUpdates(locList);
 					Log.d("locmana:", "eliminada update");
@@ -261,7 +261,7 @@ public class MainActivity extends Activity {
 				else Log.d("OnchekedGps:", "Gps Radio no seleccionado "+bestProv);
 			}
 		});
-		
+
 		rBtnNw.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -271,7 +271,7 @@ public class MainActivity extends Activity {
 					bestProv="NETWORK_PROVIDER";
 					prefs.edit().putString("bestProv",bestProv).commit();
 					Log.d("Mejor Proveedor", "Guardado "+bestProv);
-					
+
 					//eliminar actualizacion anterior
 					locMana.removeUpdates(locList);
 					Log.d("locmana", "eliminada update");
@@ -279,16 +279,16 @@ public class MainActivity extends Activity {
 					minTime=prefs.getInt(Constantes.keyMuestreo, 0)*(1000*60);
 					Log.e("Location", "tiempo muestreo cada:"+minTime+" "+Constantes.keyMuestreo+"min\n Ditancia minima: "+minDistancia);
 					//si es caminando distancia minima a recoger es 66m, 60 min 4km/hr ,  si es en carro cada 500m  20 o 30 km/hr datos Hresendiz 
-					
+
 					locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
 					Log.d("Location:", "nuevo update "+bestProv);
 				}
 				else Log.d("OnchekedNW:", "Nw Radio no seleccionado "+bestProv);
 			}
 		});
-		
-		
-		
+
+
+
 		//Modo de traslado
 		//si es caminando distancia minima a recoger es 66m, 60 min 4km/hr ,  si es en carro cada 500m  20 o 30 km/hr datos Hresendiz
 		rBtnPie.setOnCheckedChangeListener(new OnCheckedChangeListener() {			
@@ -301,9 +301,9 @@ public class MainActivity extends Activity {
 					minDistancia=minTime*50;
 					prefs.edit().putString("modoTras",modoTraslado).commit();
 					Log.d("modoTras Pie:", "Guardado "+modoTraslado);
-					
-					
-					
+
+
+
 					//eliminar actualizacion anterior
 					locMana.removeUpdates(locList);
 					Log.d("locmana", "eliminada update");
@@ -311,26 +311,26 @@ public class MainActivity extends Activity {
 					minTime=prefs.getInt(Constantes.keyMuestreo, 0)*(1000*60);
 					Log.e("Location", "tiempo muestreo cada:"+minTime+" "+Constantes.keyMuestreo+"min , distancia min: "+minDistancia);
 					//si es caminando distancia minima a recoger es 66m, 60 min 4km/hr ,  si es en carro cada 500m  20 o 30 km/hr datos Hresendiz 
-					
+
 					if (bestProv.equals("GPS_PROVIDER")){
 						locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
 						Log.d("Location:", "Primer update Loc "+ bestProv);
-						}
+					}
 					else {
 						locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
 						Log.d("Location:", "Primer update Loc "+ bestProv);
 					}
-					
-					
-					
+
+
+
 				}
-//				else Log.d("modoTrasPie:", "NO Guardado "+modoTraslado);
-				
-				
-				
+				//				else Log.d("modoTrasPie:", "NO Guardado "+modoTraslado);
+
+
+
 			}
 		});
-		
+
 		rBtnAuto.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -341,9 +341,9 @@ public class MainActivity extends Activity {
 					minDistancia=minTime*500;
 					prefs.edit().putString("modoTras",modoTraslado).commit();
 					Log.d("modoTrasAuto:", "Guardado "+modoTraslado);
-					
-					
-					
+
+
+
 					//eliminar actualizacion anterior
 					locMana.removeUpdates(locList);
 					Log.d("locmana", "eliminada update");
@@ -351,21 +351,21 @@ public class MainActivity extends Activity {
 					minTime=prefs.getInt(Constantes.keyMuestreo, 0)*(1000*60);
 					Log.e("Location", "tiempo muestreo cada:"+minTime+" "+Constantes.keyMuestreo+"min , distancia min: "+minDistancia);
 					//si es caminando distancia minima a recoger es 66m, 60 min 4km/hr ,  si es en carro cada 500m  20 o 30 km/hr datos Hresendiz 
-					
+
 					if (bestProv.equals("GPS_PROVIDER")){
 						locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
 						Log.d("Location:", "Primer update Loc "+ bestProv);
-						}
+					}
 					else {
 						locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
 						Log.d("Location:", "Primer update Loc "+ bestProv);
 					}
-					
+
 				}
-//				else Log.d("modoTrasAuto:", "NO Guardado "+modoTraslado);
+				//				else Log.d("modoTrasAuto:", "NO Guardado "+modoTraslado);
 			}
 		});
-		
+
 
 		/*
 		Criteria req=new Criteria();
@@ -383,7 +383,7 @@ public class MainActivity extends Activity {
 			lastLaty=String.valueOf(locationMobile.getLatitude());
 			lastLonx=String.valueOf(locationMobile.getLongitude());
 			lastTime=String.valueOf(locationMobile.getTime());
-			
+
 			//Imprimimos en pantalla
 			tvLati.setText("Provedor:"+bestProv+"\nlastLatitud: " + lastLaty );
 			tvLong.setText("lastLongitud: " + lastLonx);
@@ -391,13 +391,13 @@ public class MainActivity extends Activity {
 			Date date=new Date(locationMobile.getTime());
 			tvTimes.setText("TimesStamp: "+ lastTime+"\n"+ "date.tostring:"+date.toString());
 			Log.e("if", "Obtuve ultima posición");
-//				lastSendLonx=prefs.getString("lastSendLonx", "0");
-//				lastSendLaty=prefs.getString("lastSendLaty", "0");
+			//				lastSendLonx=prefs.getString("lastSendLonx", "0");
+			//				lastSendLaty=prefs.getString("lastSendLaty", "0");
 			lastSendTime=prefs.getString("lastSendTime", "0");
-			
+
 			Log.e("lastSendTime",prefs.getString("lastSendTime", "0"));
-//Log.e("lastSendLaty",prefs.getString("lastSendLaty", "0"));
-//Log.e("lastSendLonx",prefs.getString("lastSendLonx", "0"));
+			//Log.e("lastSendLaty",prefs.getString("lastSendLaty", "0"));
+			//Log.e("lastSendLonx",prefs.getString("lastSendLonx", "0"));
 
 			//Comprobamos si la ultima localización conocida ya fue guardada			
 			if(!lastTime.equals(lastSendTime)){
@@ -418,12 +418,12 @@ public class MainActivity extends Activity {
 						cont=0;
 					}
 					else{ 
-//Establecer timer para volver a intentar ingresar datos
+						//Establecer timer para volver a intentar ingresar datos
 						cont++;
 						Log.d("responsePhp","Loc no insertada");
 					}
 				}while(!responsePhp.contains("_1")&&cont<5);
-				
+
 				prefs.edit().putString("responsePHP", responsePhp).commit();
 				//Verificamos si la localización o punto está dentro del poligono o restricción				
 				Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
@@ -437,20 +437,20 @@ public class MainActivity extends Activity {
 			}
 		}
 		else Log.e("if LocMana", "NO Obtuve posición, locmana vacio");
-	//pasar milisegundos a minutos
-			minTime=prefs.getInt(Constantes.keyMuestreo, 0)*(1000*60);
-			Log.e("Location", "tiempo muestreo cada:"+minTime+" "+Constantes.keyMuestreo+"min , distancia min: "+minDistancia);
-			//si es caminando distancia minima a recoger es 66m, 60 min 4km/hr ,  si es en carro cada 500m  20 o 30 km/hr datos Hresendiz 
-			
-			if (bestProv.equals("GPS_PROVIDER")){
-				locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
-				Log.d("Location:", "Primer update Loc "+ bestProv);
-				}
-			else {
-				locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
-				Log.d("Location:", "Primer update Loc "+ bestProv);
-			}
-			
+		//pasar milisegundos a minutos
+		minTime=prefs.getInt(Constantes.keyMuestreo, 0)*(1000*60);
+		Log.e("Location", "tiempo muestreo cada:"+minTime+" "+Constantes.keyMuestreo+"min , distancia min: "+minDistancia);
+		//si es caminando distancia minima a recoger es 66m, 60 min 4km/hr ,  si es en carro cada 500m  20 o 30 km/hr datos Hresendiz 
+
+		if (bestProv.equals("GPS_PROVIDER")){
+			locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
+			Log.d("Location:", "Primer update Loc "+ bestProv);
+		}
+		else {
+			locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
+			Log.d("Location:", "Primer update Loc "+ bestProv);
+		}
+
 
 		//Menu
 		tvConf.setOnClickListener(new OnClickListener() {
@@ -471,32 +471,32 @@ public class MainActivity extends Activity {
 				startActivity(intAcer);
 			}
 		});
-		
 
-		
+
+
 
 	}//Termina OnCreate
 
-	
+
 	//listener cuando el boton BACK sea presionado
-	
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event)  {
-	    if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
-	            && keyCode == KeyEvent.KEYCODE_BACK
-	            && event.getRepeatCount() == 0) {
-	        // Take care of calling this method on earlier versions of
-	        // the platform where it doesn't exist.
-	        onBackPressed();
-	    }
+		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.ECLAIR
+				&& keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getRepeatCount() == 0) {
+			// Take care of calling this method on earlier versions of
+			// the platform where it doesn't exist.
+			onBackPressed();
+		}
 
-	    return super.onKeyDown(keyCode, event);
+		return super.onKeyDown(keyCode, event);
 	}
-	
+
 	@Override
 	public void onBackPressed() {
-	   Log.d("Back", "onBackPressed Called");
-	   AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		Log.d("Back", "onBackPressed Called");
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Salir de la aplicación?\n**Puedes presionar el botón \"HOME\" para cambiar de aplicación")
 		.setCancelable(false)
 		.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -515,7 +515,7 @@ public class MainActivity extends Activity {
 		AlertDialog alertDialog = builder.create();
 		alertDialog.show();
 	}
-	
+
 
 	//Habilita GPS
 	public void habGps(){
@@ -574,33 +574,33 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			nvp.add(new BasicNameValuePair("lonx", lonx));
 			nvp.add(new BasicNameValuePair("timestamp", timeStamp));
 			nvp.add(new BasicNameValuePair("bestprov", bestProv));
-			
-			
+
+
 			httpPost.setEntity(new UrlEncodedFormEntity(nvp));
-			
+
 			//Si responde, ejecutamos
 			HttpResponse httpResponse=httpClient.execute(httpPost);
 			//obtenemos respuesta
 			HttpEntity httpEntity=httpResponse.getEntity();
 			is=httpEntity.getContent();
-						
+
 		}catch (ClientProtocolException e) {
-Log.e("webservice","ClientProtocol"+e.toString());			// TODO: handle exception
-Toast toast = Toast.makeText(MainActivity.this, "webservice ClientProtocol"+e.toString(),Toast.LENGTH_LONG);
-toast.show();
+			Log.e("webservice","ClientProtocol"+e.toString());			// TODO: handle exception
+			Toast toast = Toast.makeText(MainActivity.this, "webservice ClientProtocol"+e.toString(),Toast.LENGTH_LONG);
+			toast.show();
 		}catch (IOException e) {
 			// TODO: handle exception
-Log.e("webservice","ioException"+e.toString());
-Toast toast = Toast.makeText(MainActivity.this, "webservice ioException"+e.toString(),Toast.LENGTH_LONG);
-toast.show();
+			Log.e("webservice","ioException"+e.toString());
+			Toast toast = Toast.makeText(MainActivity.this, "webservice ioException"+e.toString(),Toast.LENGTH_LONG);
+			toast.show();
 		}
-		
+
 		//convertimos respuesta a string
 		try{
 			BufferedReader bf=new BufferedReader
 					//(new InputStreamReader(is,"iso-8859-1"),8);
-			(new InputStreamReader(is,"utf-8"),8);
-			
+					(new InputStreamReader(is,"utf-8"),8);
+
 			StringBuilder sb=new StringBuilder();
 			String line=null;
 			while((line=bf.readLine())!=null){
@@ -616,65 +616,68 @@ toast.show();
 		}
 		return responsePhp;
 	}
-	
-	
+
+
 	//Inyección de código JavaScript a wscontainandroid.html
 	public void contain (final String laty, final String lonx){
 		//si no hay Restricción lo identificaremos con ?
 		String responsePhp=prefs.getString("responsePHP", "?");
-		String jsRest=responsePhp.substring(4, (responsePhp.length()-2));
+		final String jsRest=responsePhp.substring(4, (responsePhp.length()-2));
+		//final String jsRest="var myCoordinates = [new google.maps.LatLng(19.882176,-99.328062),new google.maps.LatLng(19.214408,-99.569761),new google.maps.LatLng(18.783313,-98.935300),new google.maps.LatLng(18.850908,-98.421690),new google.maps.LatLng(19.858929,-98.457395)];var polyOptions = {path: myCoordinates,strokeColor: \"#FF0000\",strokeOpacity: 0.8,strokeWeight: 2,fillColor: \"#0000FF\",fillOpacity: 0.6}";
+		
 		//jsRest=jsRest.replaceAll("(\\r|\\n)"," ");
-			
+
 		if (jsRest.length()>0){
 			Log.v("Restricción","Restricción de área var jsRest=\n"+jsRest+"\n---");
 			Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
 			wsContainPto="sin dato";
 			final WebView wViewContain=(WebView) findViewById(R.id.webViewMainJs);
 			final JavaScriptInterface jsi = new JavaScriptInterface(this);
-			
+
 			wViewContain.addJavascriptInterface(jsi, "androidFunction");
 			wViewContain.getSettings().setJavaScriptEnabled(true);
-			
-/*			wViewContain.setWebViewClient(new WebViewClient(){
+
+			//función que espera hasta que la pagina haya sido cargada para inyectar js
+			wViewContain.setWebViewClient(new WebViewClient(){
 				public void onPageFinished(WebView view, String url){
-					
+					Log.v("inyección","Pagina cargada, Inicio JS");
+					wViewContain.loadUrl("javascript: "+jsRest+";");
+					wViewContain.loadUrl("javascript: var poligono = new google.maps.Polygon(polyOptions);");
+					wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
+					wViewContain.loadUrl("javascript: iniciar();");
+					String msgToSend="Funcionaaa por favor";
+					wViewContain.loadUrl("javascript: callFromActivity(\""+msgToSend+"\");");
+					Log.v("inyección","Fin JS");
 				}
 			});			
-*/
+			
 			wViewContain.loadUrl(wViewContainUrl);
-			Log.v("inyección","Pagina cargada, Inicio JS");
-			wViewContain.loadUrl("javascript: "+jsRest+";");
-			wViewContain.loadUrl("javascript: var poligono = new google.maps.Polygon(polyOptions);");
-			wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
-			wViewContain.loadUrl("javascript: iniciar();");
-			String msgToSend="Fncionaaa por favor";
-			wViewContain.loadUrl("javascript: callFromActivity(\""+msgToSend+"\");");
-			Log.v("inyección","Fin JS");
+			
 		}
 		else Log.v("Sin Restricción","Sin restricción de área var jsRest="+jsRest);
 		Log.v("Contain","fin función contain");
 	}
-	
+
 	public class JavaScriptInterface {
 		Context mContext;
 		Date fecha;
 
-	    JavaScriptInterface(Context c) {
-	        mContext = c;
-	    }
-	    
-	    
-	    public void puntoIn(){
-	    	fecha=new Date();
-	    	Log.v("androidFunction","puntoIn"+fecha);
-	    	wsContainPto="in ";    
-	    }
-	    
-	    public void puntoOut (){
-	    	fecha=new Date();
-	    	Log.v("androidFunction","puntoOut");
-	    	wsContainPto="out";
-	    }
+		JavaScriptInterface(Context c) {
+			mContext = c;
+		}
+
+
+		public void puntoIn(){
+			fecha=new Date();
+			Log.v("androidFunction","puntoIn "+fecha);
+			wsContainPto="in ";    
+		}
+
+		public void puntoOut (){
+			fecha=new Date();
+			Log.v("androidFunction","puntoOut "+fecha);
+			wsContainPto="out";
+		}
 	}
 
 }//termina
