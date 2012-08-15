@@ -423,9 +423,11 @@ public class MainActivity extends Activity {
 					}
 				}while(!responsePhp.contains("_1")&&cont<5);
 				
+				prefs.edit().putString("responsePHP", responsePhp).commit();
 				//Verificamos si la localización o punto está dentro del poligono o restricción				
 				Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
-				contain(lastLaty, lastLonx, responsePhp);
+				//contain(lastLaty, lastLonx, responsePhp);
+				contain(lastLaty, lastLonx);
 				Log.v("contain","La restricción contiene a la localización?"+wsContainPto);
 				if(wsContainPto.contains("out")){
 					mp.start();
@@ -616,8 +618,8 @@ toast.show();
 	
 	
 	//Inyección de código JavaScript a wscontainandroid.html
-	public void contain (final String laty, final String lonx, String responsePhp){
-		
+	public void contain (final String laty, final String lonx){
+		String responsePhp=prefs.getString("responsePHP", "SR");
 		String jsRest=responsePhp.substring(4, responsePhp.length());
 		//jsRest=jsRest.replaceAll("(\\r|\\n)"," ");
 			

@@ -12,7 +12,7 @@ function callFromActivity(msg){
 
 
         function iniciar(){
-
+/* Se utiliza para probar si se ejecuta el javascript en android
 			var pts = [ new google.maps.LatLng(19.301403, -99.146976),
 						new google.maps.LatLng(19.295489, -99.155216),
 						new google.maps.LatLng(19.314930, -99.167575),
@@ -26,8 +26,8 @@ function callFromActivity(msg){
 						fillColor : "#FF0000",
 						fillOpacity : 0.35
 					});
-
-		var punto=new google.maps.LatLng(19.316, -99.159);	
+		var punto=new google.maps.LatLng(19.316, -99.159);
+*/
 		if (google.maps.geometry.poly.containsLocation(punto, poligono)) {
 			document.getElementById("message").innerHTML = "The mouse is INSIDE the polygon.";
 			androidFunction.puntoIn();
