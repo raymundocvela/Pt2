@@ -180,7 +180,8 @@ public class MainActivity extends Activity {
 						}while(!responsePhp.contains("_1")&&cont<5);
 						
 						//Verificamos si la localización o punto está dentro del poligono o restricción
-						contain(lastLaty, lastLonx, responsePhp);
+						prefs.edit().putString("responsePHP", responsePhp).commit();
+						contain(lastLaty, lastLonx);
 						Log.v("contain","La restricción contiene a la localización?:"+wsContainPto);
 						if(wsContainPto.contains("out")){
 							mp.start();
@@ -619,12 +620,13 @@ toast.show();
 	
 	//Inyección de código JavaScript a wscontainandroid.html
 	public void contain (final String laty, final String lonx){
-		String responsePhp=prefs.getString("responsePHP", "SR");
-		String jsRest=responsePhp.substring(4, responsePhp.length());
+		//si no hay Restricción lo identificaremos con ?
+		String responsePhp=prefs.getString("responsePHP", "?");
+		String jsRest=responsePhp.substring(4, (responsePhp.length()-2));
 		//jsRest=jsRest.replaceAll("(\\r|\\n)"," ");
 			
 		if (jsRest.length()>0){
-			Log.v("Restricción","Restricción de área var jsRest="+jsRest+"\n---");
+			Log.v("Restricción","Restricción de área var jsRest=\n"+jsRest+"\n---");
 			Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
 			wsContainPto="sin dato";
 			final WebView wViewContain=(WebView) findViewById(R.id.webViewMainJs);
@@ -635,19 +637,18 @@ toast.show();
 			
 /*			wViewContain.setWebViewClient(new WebViewClient(){
 				public void onPageFinished(WebView view, String url){
-					Log.v("inyección","Pagina cargada, Inicio JS");
-					wViewContain.loadUrl("javascript:"+jsRest);
-					wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
-					wViewContain.loadUrl("javascript: iniciar()");
+					
 				}
 			});			
 */
 			wViewContain.loadUrl(wViewContainUrl);
 			Log.v("inyección","Pagina cargada, Inicio JS");
-			wViewContain.loadUrl("javascript: "+jsRest);
+			wViewContain.loadUrl("javascript: "+jsRest+";");
+			wViewContain.loadUrl("javascript: var poligono = new google.maps.Polygon(polyOptions);");
 			wViewContain.loadUrl("javascript: var punto=new google.maps.LatLng("+laty+","+lonx+");");
 			wViewContain.loadUrl("javascript: iniciar();");
-			//wViewContain.loadUrl("javascript:callFromActivity(\""+msgToSend+"\")");
+			String msgToSend="Fncionaaa por favor";
+			wViewContain.loadUrl("javascript: callFromActivity(\""+msgToSend+"\");");
 			Log.v("inyección","Fin JS");
 		}
 		else Log.v("Sin Restricción","Sin restricción de área var jsRest="+jsRest);
@@ -656,17 +657,21 @@ toast.show();
 	
 	public class JavaScriptInterface {
 		Context mContext;
+		Date fecha;
 
 	    JavaScriptInterface(Context c) {
 	        mContext = c;
 	    }
 	    
+	    
 	    public void puntoIn(){
-	    	Log.v("androidFunction","puntoIn");
-	    	wsContainPto="in";    
+	    	fecha=new Date();
+	    	Log.v("androidFunction","puntoIn"+fecha);
+	    	wsContainPto="in ";    
 	    }
 	    
 	    public void puntoOut (){
+	    	fecha=new Date();
 	    	Log.v("androidFunction","puntoOut");
 	    	wsContainPto="out";
 	    }

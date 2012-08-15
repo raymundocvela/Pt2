@@ -6,12 +6,14 @@
 </script>
 <script type="text/javascript">
 function callFromActivity(msg){
-	document.getElementById("message").innerHTML=msg;
+	document.getElementById("message2").innerHTML=msg;
+	androidFunction.puntoOut();
 }
 
 
 
         function iniciar(){
+        	     	        	
 /* Se utiliza para probar si se ejecuta el javascript en android
 			var pts = [ new google.maps.LatLng(19.301403, -99.146976),
 						new google.maps.LatLng(19.295489, -99.155216),
@@ -29,10 +31,10 @@ function callFromActivity(msg){
 		var punto=new google.maps.LatLng(19.316, -99.159);
 */
 		if (google.maps.geometry.poly.containsLocation(punto, poligono)) {
-			document.getElementById("message").innerHTML = "The mouse is INSIDE the polygon.";
+			document.getElementById("message").innerHTML = "INSIDE the polygon.";
 			androidFunction.puntoIn();
 		} else {
-			document.getElementById("message").innerHTML = "The mouse is outside the polygon.";
+			document.getElementById("message").innerHTML = "outside the polygon.";
 			androidFunction.puntoOut();
 		}
 	}
@@ -45,5 +47,6 @@ function callFromActivity(msg){
   -->
 <body>
 	<div id="message">message&nbsp;</div>
+	<div id="message2">message2&nbsp;</div>
 </body>
 </html>
