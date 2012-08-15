@@ -65,6 +65,7 @@ public class MainActivity extends Activity {
 	public String LocManProvider;
 	public String wViewContainUrl="file:///android_asset/wscontainandroid.html";
 	public String wsContainPto="";
+	public String jsRest;
 	MediaPlayer mp;
 
 	/**
@@ -622,10 +623,11 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 	public void contain (final String laty, final String lonx){
 		//si no hay Restricción lo identificaremos con ?
 		String responsePhp=prefs.getString("responsePHP", "?");
-		final String jsRest=responsePhp.substring(4, (responsePhp.length()-2));
+		jsRest=responsePhp.substring(4, (responsePhp.length()-2));
 		//final String jsRest="var myCoordinates = [new google.maps.LatLng(19.882176,-99.328062),new google.maps.LatLng(19.214408,-99.569761),new google.maps.LatLng(18.783313,-98.935300),new google.maps.LatLng(18.850908,-98.421690),new google.maps.LatLng(19.858929,-98.457395)];var polyOptions = {path: myCoordinates,strokeColor: \"#FF0000\",strokeOpacity: 0.8,strokeWeight: 2,fillColor: \"#0000FF\",fillOpacity: 0.6}";
 		
 		//jsRest=jsRest.replaceAll("(\\r|\\n)"," ");
+		jsRest=jsRest.replaceAll("(<comas>)","\"");
 
 		if (jsRest.length()>0){
 			Log.v("Restricción","Restricción de área var jsRest=\n"+jsRest+"\n---");
