@@ -1,5 +1,6 @@
 package net.igconsultores.raymundo.pt2;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,6 +31,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -183,10 +185,9 @@ public class MainActivity extends Activity {
 						//Verificamos si la localización o punto está dentro del poligono o restricción
 						prefs.edit().putString("responsePHP", responsePhp).commit();
 						contain(lastLaty, lastLonx);
+						SystemClock.sleep(500);
 						Log.v("contain","La restricción contiene a la localización?:"+wsContainPto);
-						if(wsContainPto.contains("out")){
-							mp.start();
-						}
+						wsContainPto="sin Dato";
 						Log.v("FIN","verificación COMPLETA");
 
 					}
@@ -430,10 +431,14 @@ public class MainActivity extends Activity {
 				Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
 				//contain(lastLaty, lastLonx, responsePhp);
 				contain(lastLaty, lastLonx);
+				SystemClock.sleep(500);
 				Log.v("contain","La restricción contiene a la localización?"+wsContainPto);
+/*
 				if(wsContainPto.contains("out")){
 					mp.start();
 				}
+*/				
+				wsContainPto="sin Dato";
 				Log.v("FIN","verificación COMPLETA");
 			}
 		}
@@ -622,17 +627,16 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 	//Inyección de código JavaScript a wscontainandroid.html
 	public void contain (final String laty, final String lonx){
 		//si no hay Restricción lo identificaremos con ?
-		String responsePhp=prefs.getString("responsePHP", "?");
+		String responsePhp=prefs.getString("responsePHP", "-SR-");
 		jsRest=responsePhp.substring(4, (responsePhp.length()-2));
-		//final String jsRest="var myCoordinates = [new google.maps.LatLng(19.882176,-99.328062),new google.maps.LatLng(19.214408,-99.569761),new google.maps.LatLng(18.783313,-98.935300),new google.maps.LatLng(18.850908,-98.421690),new google.maps.LatLng(19.858929,-98.457395)];var polyOptions = {path: myCoordinates,strokeColor: \"#FF0000\",strokeOpacity: 0.8,strokeWeight: 2,fillColor: \"#0000FF\",fillOpacity: 0.6}";
-		
-		//jsRest=jsRest.replaceAll("(\\r|\\n)"," ");
-		jsRest=jsRest.replaceAll("(<comas>)","\"");
-
-		if (jsRest.length()>0){
+		if (!jsRest.contains("-SR-")){
+			
+			//se puede eliminar codigo innecesario, la configuración del poligono es la misma siempre
+			//jsRest=jsRest.replaceAll("(\\r|\\n)"," ");
+			jsRest=jsRest.replaceAll("(<comas>)","\"");	
 			Log.v("Restricción","Restricción de área var jsRest=\n"+jsRest+"\n---");
 			Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
-			wsContainPto="sin dato";
+			//wsContainPto="sin dato";
 			final WebView wViewContain=(WebView) findViewById(R.id.webViewMainJs);
 			final JavaScriptInterface jsi = new JavaScriptInterface(this);
 
@@ -640,6 +644,7 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			wViewContain.getSettings().setJavaScriptEnabled(true);
 
 			//función que espera hasta que la pagina haya sido cargada para inyectar js
+			//marca out porque JS se ejcuta asincronamente, loadurl android webview syncronus
 			wViewContain.setWebViewClient(new WebViewClient(){
 				public void onPageFinished(WebView view, String url){
 					Log.v("inyección","Pagina cargada, Inicio JS");
@@ -652,9 +657,7 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 					Log.v("inyección","Fin JS");
 				}
 			});			
-			
-			wViewContain.loadUrl(wViewContainUrl);
-			
+			wViewContain.loadUrl(wViewContainUrl);			
 		}
 		else Log.v("Sin Restricción","Sin restricción de área var jsRest="+jsRest);
 		Log.v("Contain","fin función contain");
@@ -663,22 +666,26 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 	public class JavaScriptInterface {
 		Context mContext;
 		Date fecha;
-
 		JavaScriptInterface(Context c) {
 			mContext = c;
 		}
 
-
 		public void puntoIn(){
 			fecha=new Date();
 			Log.v("androidFunction","puntoIn "+fecha);
-			wsContainPto="in ";    
+			wsContainPto="in";    
 		}
 
 		public void puntoOut (){
 			fecha=new Date();
 			Log.v("androidFunction","puntoOut "+fecha);
 			wsContainPto="out";
+			mp.start();
+		}
+		
+		public void sinRest (){
+			fecha=new Date();
+			Log.v("androidFunction","SinRest o no se inyecto JS "+fecha);
 		}
 	}
 
