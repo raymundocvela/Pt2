@@ -20,6 +20,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -34,6 +35,9 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.webkit.WebView;
@@ -71,6 +75,7 @@ public class MainActivity extends Activity {
 	MediaPlayer mp;
 
 	/**
+	 * @return 
 	 * @see android.app.Activity#onCreate(Bundle)
 	 */
 	@Override
@@ -78,7 +83,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		// TODO Put your code here
 		setContentView(R.layout.main);
-
+		
 		final TextView tvConf =(TextView) findViewById(R.id.mainConf_textView2);
 		//		final TextView tvPos =(TextView) findViewById(R.id.mainPos_textView3);
 		final TextView tvAcer =(TextView) findViewById(R.id.mainAcer_textView4);
@@ -94,7 +99,7 @@ public class MainActivity extends Activity {
 		prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 		locMana=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		mp=MediaPlayer.create(MainActivity.this, R.raw.alert);
-
+		
 		//Listener Localizacion
 		locList=new LocationListener() {
 			@Override
@@ -457,7 +462,7 @@ public class MainActivity extends Activity {
 			Log.d("Location:", "Primer update Loc "+ bestProv);
 		}
 
-
+/*
 		//Menu
 		tvConf.setOnClickListener(new OnClickListener() {
 			@Override
@@ -477,7 +482,7 @@ public class MainActivity extends Activity {
 				startActivity(intAcer);
 			}
 		});
-
+*/
 
 
 
@@ -689,4 +694,31 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 		}
 	}
 
-}//termina
+	// Inflate Menu from XML	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_principal, menu);
+		return true;
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {  
+		switch (item.getItemId()) {  
+		case R.id.itemConf:  
+			// TODO Auto-generated method stub
+			Intent confInt = new Intent().setClass(MainActivity.this, ConfReadOnlyActivity.class);
+			Log.e("conf", "mando intent");			
+			startActivity(confInt); 
+			break;
+		case R.id.itemAcer: 
+			Intent intAcer = new Intent().setClass(MainActivity.this, AcerActivity.class);
+			startActivity(intAcer);
+			break;
+		default: Log.e("MENU","Default");
+			// put your code here
+			
+		}  
+		return false;  
+	}
+	
+}//terminaActivity

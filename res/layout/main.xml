@@ -156,8 +156,9 @@
                 android:id="@+id/webViewMainJs"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:visibility="gone"
                 />
-				                <!--android:visibility="gone"--> 
+				                <!----> 
 
         </LinearLayout>
     </ScrollView>
