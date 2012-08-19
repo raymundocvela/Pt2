@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
 	public Context context;
 	public String bestProv;
 	public String wsGetLocUrl="http://igconsultores.net/raymundo/wsgetloc.php";
+	public String wsSendMail="http://igconsultores.net/raymundo/ws_send_mail.php";
 	public String lastLonx;
 	public String lastLaty;
 	public String lastTime;
@@ -627,6 +628,63 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 		}
 		return responsePhp;
 	}
+	
+	
+	public String sendMail(String usr, String laty, String lonx, String timeStamp, String bestProv){
+		HttpClient httpClient= new DefaultHttpClient();
+		HttpPost httpPost=new HttpPost(wsSendMail);
+		InputStream is=null;
+		String responsePhp="";
+		try{
+			//Datos a enviar			
+			List<NameValuePair> nvp= new ArrayList<NameValuePair>();
+			nvp.add(new BasicNameValuePair("usr", usr));
+			nvp.add(new BasicNameValuePair("laty", laty));
+			nvp.add(new BasicNameValuePair("lonx", lonx));
+			nvp.add(new BasicNameValuePair("timestamp", timeStamp));
+			nvp.add(new BasicNameValuePair("bestprov", bestProv));
+
+
+			httpPost.setEntity(new UrlEncodedFormEntity(nvp));
+
+			//Si responde, ejecutamos
+			HttpResponse httpResponse=httpClient.execute(httpPost);
+			//obtenemos respuesta
+			HttpEntity httpEntity=httpResponse.getEntity();
+			is=httpEntity.getContent();
+
+		}catch (ClientProtocolException e) {
+			Log.e("webservice","ClientProtocol"+e.toString());			// TODO: handle exception
+			Toast toast = Toast.makeText(MainActivity.this, "webservice ClientProtocol"+e.toString(),Toast.LENGTH_LONG);
+			toast.show();
+		}catch (IOException e) {
+			// TODO: handle exception
+			Log.e("webservice","ioException"+e.toString());
+			Toast toast = Toast.makeText(MainActivity.this, "webservice ioException"+e.toString(),Toast.LENGTH_LONG);
+			toast.show();
+		}
+
+		//convertimos respuesta a string
+		try{
+			BufferedReader bf=new BufferedReader
+					//(new InputStreamReader(is,"iso-8859-1"),8);
+					(new InputStreamReader(is,"utf-8"),8);
+
+			StringBuilder sb=new StringBuilder();
+			String line=null;
+			while((line=bf.readLine())!=null){
+				sb.append(line+"\n");
+			}
+			is.close();
+			responsePhp=sb.toString();
+		}catch (Exception e) {
+			// TODO: handle exception
+			Log.e("responsePhp",e.toString());
+			Toast toast = Toast.makeText(MainActivity.this, "response"+e.toString(),Toast.LENGTH_LONG);
+			toast.show();
+		}
+		return responsePhp;
+	}
 
 
 	//Inyección de código JavaScript a wscontainandroid.html
@@ -685,6 +743,7 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			fecha=new Date();
 			Log.v("androidFunction","puntoOut "+fecha);
 			wsContainPto="out";
+			//sendLoc(usr, laty, lonx, timeStamp, bestProv);
 			mp.start();
 		}
 		
