@@ -52,7 +52,7 @@ Este programa te permitirá:\n-Registrar las coordenadas de este dispositivo mó
     <string name="mainPie">A pie</string>
     <string name="mainAuto">En auto</string>
     <string name="mainModo">Modo de traslado:</string>
-    <string name="version">0.9.0</string>
+    <string name="version">0.9.2</string>
     <string name="menuConf">Configuración</string>
     <string name="menuAcer">Acerca de</string>
     <string name="MainModLoc">Obtener datos del:</string>
