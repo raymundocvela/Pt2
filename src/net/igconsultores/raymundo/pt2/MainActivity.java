@@ -84,9 +84,9 @@ public class MainActivity extends Activity {
 		// TODO Put your code here
 		setContentView(R.layout.main);
 		
-		final TextView tvConf =(TextView) findViewById(R.id.mainConf_textView2);
+//		final TextView tvConf =(TextView) findViewById(R.id.mainConf_textView2);
 		//		final TextView tvPos =(TextView) findViewById(R.id.mainPos_textView3);
-		final TextView tvAcer =(TextView) findViewById(R.id.mainAcer_textView4);
+//		final TextView tvAcer =(TextView) findViewById(R.id.mainAcer_textView4);
 		final TextView tvLati =(TextView) findViewById(R.id.textView2MainLatiTxt);
 		final TextView tvLong =(TextView) findViewById(R.id.textView4MainLongTxt);
 		final TextView tvPres =(TextView) findViewById(R.id.textView1MainPres);

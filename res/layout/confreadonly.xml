@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:layout_margin="2dip"
     android:orientation="vertical"
-    android:padding="3dip" >
+    android:padding="5sp" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -17,12 +17,6 @@
             android:layout_height="wrap_content"
             android:text="@string/confTit"
             android:textAppearance="?android:attr/textAppearanceLarge" />
-
-        <Button
-            android:id="@+id/confRo_button1Edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/confReadEdit"/>
     </LinearLayout>
 
     <ScrollView
@@ -33,39 +27,11 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
-
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/confRo_textView2Usr"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/confUser" />
-
-                <EditText
-                    android:id="@+id/confRo_editText1Usr"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:ems="10" android:focusableInTouchMode="false" android:focusable="false"/>
-
-                <TextView
-                    android:id="@+id/confRo_textView3Desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/confDesc" />
-
-                <EditText
-                    android:id="@+id/confRo_editText2Desc"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:clickable="false"
-                    android:ems="10" android:focusableInTouchMode="false" android:focusable="false"/>
 
                 <TextView
                     android:id="@+id/confRo_textView4Comp"
@@ -79,7 +45,44 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="false"
-                    android:ems="10" android:focusableInTouchMode="false" android:focusable="false"/>
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" >
+
+                    <requestFocus />
+                </EditText>
+
+                <TextView
+                    android:id="@+id/confRo_textView2Usr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/confUser" />
+
+                <EditText
+                    android:id="@+id/confRo_editText1Usr"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
+
+                <TextView
+                    android:id="@+id/confRo_textView3Desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/confDesc" />
+
+                <EditText
+                    android:id="@+id/confRo_editText2Desc"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:clickable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -98,15 +101,8 @@
                         android:layout_height="wrap_content"
                         android:text="TextView" />
                 </LinearLayout>
-
-                <Button
-                    android:id="@+id/button1_confRo_DelPrefs"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/confDelPrefs" />
-
             </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

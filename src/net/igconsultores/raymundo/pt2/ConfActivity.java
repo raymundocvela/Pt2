@@ -52,9 +52,9 @@ public class ConfActivity extends Activity {
 		setContentView(R.layout.conf);
 		
 		final EditText etUsr=(EditText) findViewById(R.id.confUsr_editText1);
-		etUsr.requestFocus();
 		final EditText etDesc=(EditText) findViewById(R.id.confDesc_editText2);
 		final EditText etComp=(EditText) findViewById(R.id.confComp_editText);
+		etComp.requestFocus();
 		final TextView tvMues= (TextView) findViewById(R.id.confMues_textView5);
 		final SeekBar sbMues=(SeekBar) findViewById(R.id.confMues_seekBar1);
 		

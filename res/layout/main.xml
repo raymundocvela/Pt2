@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/mainTit"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="30sp" />
+        android:textSize="25sp" android:padding="5sp"/>
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -25,27 +25,7 @@
             android:addStatesFromChildren="true"
             android:baselineAligned="true"
             android:gravity="center_vertical|center_horizontal"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/mainConf_textView2"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dip"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/mainConf"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/mainPos_textView3"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dip"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/mainPos"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20sp" />
+            android:orientation="vertical" android:padding="5sp">
 
             <TextView
                 android:id="@+id/textView2MainLatiTxt"
@@ -79,6 +59,12 @@
                 android:layout_marginLeft="20dip"
                 android:text="TimeStamp:" />
 
+            <TextView
+                android:id="@+id/textViewMainModLoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/MainModLoc" android:textSize="15sp"/>
+
             <RadioGroup
                 android:id="@+id/radioGroup1MainLoc"
                 android:layout_width="wrap_content"
@@ -110,7 +96,8 @@
                 android:id="@+id/textViewMainModo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/mainModo" />
+                android:text="@string/mainModo"
+                android:textSize="15sp"/>
 
 <RadioGroup
     android:id="@+id/radioGroupMainModo"
@@ -130,16 +117,6 @@
         android:layout_height="wrap_content"
         android:text="@string/mainAuto" />
 </RadioGroup>
-
-            <TextView
-                android:id="@+id/mainAcer_textView4"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dip"
-                android:gravity="center_vertical|center_horizontal"
-                android:text="@string/mainAcer"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20sp" />
 <!-- 
 
             <TextView

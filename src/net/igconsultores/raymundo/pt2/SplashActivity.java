@@ -68,9 +68,5 @@ public class SplashActivity extends Activity {
         Timer tm = new Timer();
         tm.schedule(tmTsk, 1500);
          
-        
-        
-        
-        
-    }//onCreate
-}//fin
+    }//Fin onCreate
+}//fin Activity

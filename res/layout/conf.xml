@@ -28,6 +28,29 @@
                 android:gravity="center_vertical"
                 android:orientation="vertical" >
 
+                <LinearLayout
+                    android:id="@+id/linearLayout4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/confComp_textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="2dip"
+                        android:text="@string/confComp" />
+
+                    <EditText
+                        android:id="@+id/confComp_editText"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textCapCharacters|textNoSuggestions" >
+
+                        <requestFocus />
+                    </EditText>
+                </LinearLayout>
+
                 <TextView
                     android:id="@+id/confUsr_textView2"
                     android:layout_width="wrap_content"
@@ -53,26 +76,6 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapCharacters|textNoSuggestions" />
-
-                <LinearLayout
-                    android:id="@+id/linearLayout4"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
-
-                    <TextView
-                        android:id="@+id/confComp_textView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingTop="2dip"
-                        android:text="@string/confComp" />
-
-                    <EditText
-                        android:id="@+id/confComp_editText"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textCapCharacters|textNoSuggestions" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/linearLayout3"

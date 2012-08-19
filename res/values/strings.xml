@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <resources>
-    <string name="hello">Hello World</string>
     <string name="app_name">MobileHunt</string>
     <string name="sample_pref_click_pop_up">Click to pop up a list to choose from</string>
     <string name="sample_pref_sel_dialog">Selection Dialog</string>
@@ -28,7 +27,8 @@
         <item>Three</item>
     </string-array>
     <string name="bienv">BIENVENIDO</string>
-    <string name="bienvMsj">Este programa te permitirá registrar las coordenadas de este dispositivo, enviarlas a un servidor Web y consultarlas en cualquier explorador de Internet en Tiempo Real.\nAdicionalmente se podrán poner restricciones de localización, que al no ser atendidas, el dispositivo podrá ser apagado remotamente.</string>
+    <string name="bienvMsj">Este es el asistente que te guiará en la configuración inicial de tu dispositivo.
+Este programa te permitirá:\n-Registrar las coordenadas de este dispositivo móvil (Smartphone, Tablet, etc…).\n-Enviarlas a un servidor Web.\n-Consultar la información en Tiempo Real en http:\\igconsultores.net\\raymundo en un explorador de Internet (Chrome, Firefox, IE).\n- Adicionalmente se podrá establecer una restricción de área a este dispositivo, que al no ser atendida, emitirá una señal de alarma y enviará un mail al administrador de la aplicación reportando el suceso.</string>
     <string name="pswSetTxt">Establecer contraseña de Administrador\n Debe contener sólo 4 números</string>
     <string name="pswSetTit">ADMIN PSW</string>
     <string name="pswSetHint">Ejemplo:1912</string>
@@ -38,12 +38,9 @@
     <string name="confDesc">Descripción del Dispositivo</string>
     <string name="confTit">Configuración</string>
     <string name="ConfMues">Tiempo de muestreo (Localización): </string>
-    <string name="confComp">Compañia</string>
+    <string name="confComp">Estos datos servirán para identificar a este dispositivo en la página web\nhttp:\\igconsltores.net\\raymundo\nInstitución/Compañia</string>
     <string name="pswGetTxt">Ingresa la contraseña de ADMINISTRADOR</string>
-    <string name="mainConf">-Configuración</string>
-    <string name="mainTit">Menu Principal</string>
-    <string name="mainAcer">-Acerca de</string>
-    <string name="mainPos">Mi Localización</string>
+    <string name="mainTit">Mi Ubicación</string>
     <string name="acerTit">Acerca de</string>
     <string name="acerTxt">Esta aplicación se implemento y diseño en el año 2012 con el fin de la aprobación del Proyecto Terminal 2 de la Carrera de Ingeniería en Computación UAM Azcapotzalco.\nComentarios:\nraymundoc.vela@hotmail.com\n Jorge Raymundo Castillo Velázquez</string>
     <string name="mainBestp">Mejor Proveedor</string>
@@ -54,8 +51,14 @@
     <string name="mainNW">Basada en la red</string>
     <string name="mainPie">A pie</string>
     <string name="mainAuto">En auto</string>
-    <string name="mainModo">Modo de traslado</string>
+    <string name="mainModo">Modo de traslado:</string>
     <string name="version">0.9.0</string>
     <string name="menuConf">Configuración</string>
     <string name="menuAcer">Acerca de</string>
+    <string name="MainModLoc">Obtener datos del:</string>
+    <string name="confReadAlertMsg">¿Seguro que deseas borrar los datos de la aplicación e iniciar el asistente de configuración?</string>
+    <string name="no">No</string>
+    <string name="yes">Si</string>
+    <string name="menuDelPrefs">Borrar Configuración</string>
+    <string name="menuEditPrefs">Editar Configuración</string>
 </resources>
