@@ -100,13 +100,19 @@ public class MainActivity extends Activity {
 		prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
 		locMana=(LocationManager)getSystemService(Context.LOCATION_SERVICE);
 		mp=MediaPlayer.create(MainActivity.this, R.raw.alert);
-		
+		/**
+		 *laty y lonx vienen con COMA en lugar de punto, por lo que se
+		 * cambia el formato del número y se pide se trunque a 5 decimales
+		 */
+		final DecimalFormatSymbols dfs=new DecimalFormatSymbols();
+		dfs.setDecimalSeparator('.');
+		final DecimalFormat df=new DecimalFormat("0.00000",dfs);
 		//Listener Localizacion
 		locList=new LocationListener() {
 			@Override
 			public void onStatusChanged(String provider, int status, Bundle extras) {
 				// TODO Auto-generated method stub
-				Toast toast = Toast.makeText(MainActivity.this, "SatusChanged "+provider+"."+status,Toast.LENGTH_LONG);
+				Toast toast = Toast.makeText(MainActivity.this, "StatusChanged "+provider+"."+status,Toast.LENGTH_LONG);
 				toast.show();				
 			}
 
@@ -131,13 +137,6 @@ public class MainActivity extends Activity {
 				//mostrarLocalizacion(location);
 				Log.e("listener", "Cambio de localizacion: "+location);
 				if(location!=null){	
-					/**
-					 *laty y lonx vienen con COMA en lugar de punto, por lo que se
-					 * cambia el formato del número y se pide se trunque a 5 decimales
-					 */
-					DecimalFormatSymbols dfs=new DecimalFormatSymbols();
-					dfs.setDecimalSeparator('.');
-					DecimalFormat df=new DecimalFormat("0.00000",dfs);
 					/*
 					String laty = String.valueOf(df.format(location.getLatitude()));
 					String lonx= String.valueOf(df.format(location.getLongitude()));
@@ -177,8 +176,8 @@ public class MainActivity extends Activity {
 							Log.e("responsePhp",responsePhp);
 							if(responsePhp.contains("_1")){
 								Log.d("ws"," Loc insertada");
-								//							prefs.edit().putString("lastSendLonx",laty).commit();
-								//							prefs.edit().putString("lastSendLaty",lonx).commit();
+								prefs.edit().putString("lastSendLonx",laty).commit();
+								prefs.edit().putString("lastSendLaty",lonx).commit();
 								prefs.edit().putString("lastSendTime",timeStamp).commit();
 								cont=0;
 							}
@@ -190,8 +189,8 @@ public class MainActivity extends Activity {
 
 						//Verificamos si la localización o punto está dentro del poligono o restricción
 						prefs.edit().putString("responsePHP", responsePhp).commit();
-						contain(lastLaty, lastLonx);
-						SystemClock.sleep(500);
+						contain(laty, lonx);
+						//SystemClock.sleep(500);
 						Log.v("contain","La restricción contiene a la localización?:"+wsContainPto);
 						wsContainPto="sin Dato";
 						Log.v("FIN","verificación COMPLETA");
@@ -322,11 +321,11 @@ public class MainActivity extends Activity {
 
 					if (bestProv.equals("GPS_PROVIDER")){
 						locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
-						Log.d("Location:", "Primer update Loc "+ bestProv);
+						Log.d("Location:", "Cambio modo de traslado: "+ bestProv);
 					}
 					else {
 						locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
-						Log.d("Location:", "Primer update Loc "+ bestProv);
+						Log.d("Location:", "Cambio modo de traslado: "+ bestProv);
 					}
 
 
@@ -362,11 +361,11 @@ public class MainActivity extends Activity {
 
 					if (bestProv.equals("GPS_PROVIDER")){
 						locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
-						Log.d("Location:", "Primer update Loc "+ bestProv);
+						Log.d("Location:", "Auto GPS Update Loc "+ bestProv);
 					}
 					else {
 						locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
-						Log.d("Location:", "Primer update Loc "+ bestProv);
+						Log.d("Location:", " update Loc "+ bestProv);
 					}
 
 				}
@@ -388,8 +387,8 @@ public class MainActivity extends Activity {
 		if(locationMobile!=null){
 			//obtenemos localización
 			Log.e("Location", "ultima localizacion obtenida");
-			lastLaty=String.valueOf(locationMobile.getLatitude());
-			lastLonx=String.valueOf(locationMobile.getLongitude());
+			lastLaty=df.format(locationMobile.getLatitude());
+			lastLonx=df.format(locationMobile.getLongitude());
 			lastTime=String.valueOf(locationMobile.getTime());
 
 			//Imprimimos en pantalla
@@ -437,7 +436,7 @@ public class MainActivity extends Activity {
 				Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
 				//contain(lastLaty, lastLonx, responsePhp);
 				contain(lastLaty, lastLonx);
-				SystemClock.sleep(500);
+				//SystemClock.sleep(500);
 				Log.v("contain","La restricción contiene a la localización?"+wsContainPto);
 /*
 				if(wsContainPto.contains("out")){
@@ -629,8 +628,8 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 		return responsePhp;
 	}
 	
-	
-	public String sendMail(String usr, String laty, String lonx, String timeStamp, String bestProv){
+	//Enviar mail administrador
+	public String sendMail(String usr, String laty, String lonx, String bestProv){
 		HttpClient httpClient= new DefaultHttpClient();
 		HttpPost httpPost=new HttpPost(wsSendMail);
 		InputStream is=null;
@@ -641,12 +640,9 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			nvp.add(new BasicNameValuePair("usr", usr));
 			nvp.add(new BasicNameValuePair("laty", laty));
 			nvp.add(new BasicNameValuePair("lonx", lonx));
-			nvp.add(new BasicNameValuePair("timestamp", timeStamp));
 			nvp.add(new BasicNameValuePair("bestprov", bestProv));
 
-
 			httpPost.setEntity(new UrlEncodedFormEntity(nvp));
-
 			//Si responde, ejecutamos
 			HttpResponse httpResponse=httpClient.execute(httpPost);
 			//obtenemos respuesta
@@ -743,8 +739,14 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			fecha=new Date();
 			Log.v("androidFunction","puntoOut "+fecha);
 			wsContainPto="out";
-			//sendLoc(usr, laty, lonx, timeStamp, bestProv);
+			String usr=prefs.getString("usr", "sin dato");
+			String laty=prefs.getString("lastSendLaty", "sin dato");
+			String lonx=prefs.getString("lastSendLonx", "sin dato");
+			//String timeStamp=prefs.getString("lastSendTime", "sin dato");
+			String responsePhp=sendMail(usr, laty, lonx, bestProv);
+			Log.v("SendMail","responsePhp: "+responsePhp);
 			mp.start();
+			
 		}
 		
 		public void sinRest (){
