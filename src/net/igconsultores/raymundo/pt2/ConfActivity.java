@@ -55,6 +55,7 @@ public class ConfActivity extends Activity {
 		final EditText etDesc=(EditText) findViewById(R.id.confDesc_editText2);
 		final EditText etComp=(EditText) findViewById(R.id.confComp_editText);
 		etComp.requestFocus();
+		final EditText etMail=(EditText) findViewById(R.id.editText_confMail);
 		final TextView tvMues= (TextView) findViewById(R.id.confMues_textView5);
 		final SeekBar sbMues=(SeekBar) findViewById(R.id.confMues_seekBar1);
 		
