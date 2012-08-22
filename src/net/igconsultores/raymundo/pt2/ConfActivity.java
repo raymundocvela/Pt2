@@ -39,8 +39,10 @@ import android.widget.Toast;
 public class ConfActivity extends Activity {
 	public int progresssb;
 	public String wsGetDataUrl="http://igconsultores.net/raymundo/wsgetdata.php";
+	public String wsGetDataUpdateUrl="http://igconsultores.net/raymundo/wsgetdataupdate.php";
 	public SharedPreferences prefs;
 	public String usr, usrUpdate,desc, descUpdate,inst, instUpdate;
+	public Boolean update;
 	
 	/**
 	 * @see android.app.Activity#onCreate(Bundle)
@@ -63,34 +65,28 @@ public class ConfActivity extends Activity {
 		sbMues.setProgress(progresssb);
 		tvMues.setText(progresssb +"min");
 		final Button btnAcep=(Button) findViewById(R.id.confAcep_button1);
-		
-		final String existUsr=prefs.getString("usr", "sin dato").toString();
-		if(prefs.getBoolean("update", false)==true){
-			
-		}
-		
-		
-		if(!existUsr.equals("sin dato")){
-			etUsr.setText(prefs.getString("usr", "sin dato").toString());
+		//usuario actual
+		usr=prefs.getString("usr", "sin dato").toString();
+		update=prefs.getBoolean("update", false);
+
+		//Comprobamos si existe usuario
+		if(!usr.equals("sin dato")){
+			etUsr.setText(usr);
 			etDesc.setText(prefs.getString("desc", "sin dato").toString());
 			etComp.setText(prefs.getString("comp", "sin dato").toString());
 			tvMues.setText(progresssb+"min");
 			sbMues.setProgress(prefs.getInt(Constantes.keyMuestreo, 0));
 		}
-		
-		
-		sbMues.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			
+				
+		sbMues.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {			
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 			}
 			
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
-				// TODO Auto-generated method stub
-				
+				// TODO Auto-generated method stub				
 			}
 			
 			@Override
@@ -102,47 +98,54 @@ public class ConfActivity extends Activity {
 			}
 		});
 		
-		btnAcep.setOnClickListener(new OnClickListener() {
-			
+		btnAcep.setOnClickListener(new OnClickListener() {			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				String usr=etUsr.getText().toString();
+				String responsePhp="sindato";	
+				usrUpdate=etUsr.getText().toString();
 				String desc=etDesc.getText().toString();
-				String comp=etComp.getText().toString();
-				
-						
+				String comp=etComp.getText().toString();						
 				//if(etUsr.getText().toString().equals("")||etDesc.getText().toString().equals("")){
-				if(usr.equals("")||desc.equals("")||comp.equals("")){
+				if(usrUpdate.equals("")||desc.equals("")||comp.equals("")){
 					Toast toast = Toast.makeText(ConfActivity.this, "Todos los datos son obligatorios",Toast.LENGTH_LONG);
 					toast.show();
 				}
 				else{
-					//Si es una actualizacion
-
-					
-					
-					
-					SharedPreferences prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
-					SharedPreferences.Editor editor =prefs.edit();
-					//Bundle bundle=getIntent().getExtras();
-					//String psw=bundle.getString("psw");
-					//editor.putInt("psw",Integer.parseInt(psw));
-//PONER ESTO EN EL IF 					
-					editor.putString("usr",usr);
-					editor.putString("desc",desc);
-					editor.putString("comp",comp);
-					//progresssb=sbMues.getProgress();
-					editor.putInt("mues",progresssb);
-					editor.putString("bestProv","GPS_PROVIDER");
-					editor.commit();
-					Log.d("prefs", "preferencias guardadas-progressb"+progresssb);
 					String psw=prefs.getString("psw", "sindato");
-					Log.e("sendData",usr+"-"+comp+"-"+desc+"-"+Integer.toString(progresssb)+"-"+psw);
-					String responsePhp=sendData(usr, comp, desc, Integer.toString(progresssb),psw);
-					Log.e("responsePhp",responsePhp);
-					
-					if(responsePhp.contains("_1")){
+
+					//si es actualización
+					if(update==true){
+						Log.e("sendDataUpdate",usrUpdate+"-"+comp+"-"+desc+"-"+Integer.toString(progresssb)+"-"+psw);
+						responsePhp=sendDataUpdate(usr, usrUpdate, comp, desc, Integer.toString(progresssb),psw);
+						Log.e("responsePhp",responsePhp);
+
+					}
+					//Inserción normal
+					else{
+						Log.e("sendData",usrUpdate+"-"+comp+"-"+desc+"-"+Integer.toString(progresssb)+"-"+psw);
+						responsePhp=sendData(usrUpdate, comp, desc, Integer.toString(progresssb),psw);
+						Log.e("responsePhp",responsePhp);
+					}
+
+
+
+					if(responsePhp.contains("_1")){						
+						//SharedPreferences prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
+						SharedPreferences.Editor editor =prefs.edit();
+						//Bundle bundle=getIntent().getExtras();
+						//String psw=bundle.getString("psw");
+						//editor.putInt("psw",Integer.parseInt(psw));
+						//Si se insertaron datos, guardar preferencias				
+						editor.putString("usr",usrUpdate);
+						editor.putString("desc",desc);
+						editor.putString("comp",comp);
+						editor.putInt("mues",progresssb);
+						editor.putString("bestProv","GPS_PROVIDER");
+						editor.commit();
+						Log.d("prefs", "preferencias guardadas-progressb"+progresssb);
+
+						//MainActivity						
 						finish();
 						Intent intMain = new Intent(ConfActivity.this, MainActivity.class);
 						startActivity(intMain);	
@@ -150,14 +153,15 @@ public class ConfActivity extends Activity {
 					else{
 						etUsr.setBackgroundColor(Color.RED);
 						etUsr.requestFocus();
-						Toast.makeText(ConfActivity.this, "El nombre de usuario "+usr+" ya existe, intenta con otro o revisa tu conexión de internet ", Toast.LENGTH_LONG).show();
+						Toast.makeText(ConfActivity.this, "El nombre de usuario "+usrUpdate+" ya existe, intenta con otro o revisa tu conexión de internet ", Toast.LENGTH_LONG).show();
 						Log.d("responsePhp","usuario no insertado"+responsePhp);
 					}
-					
-				}
 
-			}
-		});
+				}//enviar datos
+
+
+			}//Onclick
+		});//Listener
 		
 	}//onCreate
 	
@@ -195,6 +199,56 @@ Log.e("webservice","ioException"+e.toString());
 		try{
 			BufferedReader bf=new BufferedReader
 					(new InputStreamReader(is,"iso-8859-1"),8);
+			StringBuilder sb=new StringBuilder();
+			String line=null;
+			while((line=bf.readLine())!=null){
+				sb.append(line+"\n");
+			}
+			is.close();
+			responsePhp=sb.toString();
+		}catch (Exception e) {
+			// TODO: handle exception
+Log.e("responsePhp",e.toString());			
+		}
+		return responsePhp;
+	}
+	
+	
+	public String sendDataUpdate(String usr, String usrUpdate, String comp, String desc, String mues, String psw){
+		HttpClient httpClient= new DefaultHttpClient();
+		HttpPost httpPost=new HttpPost(wsGetDataUpdateUrl);
+		InputStream is=null;
+		String responsePhp="";
+		try{
+			//Datos a enviar
+			List<NameValuePair> nvp= new ArrayList<NameValuePair>();
+
+			nvp.add(new BasicNameValuePair("usr", usr));
+			nvp.add(new BasicNameValuePair("usrupdate", usrUpdate));
+			nvp.add(new BasicNameValuePair("comp", comp));
+			nvp.add(new BasicNameValuePair("desc", desc));
+			nvp.add(new BasicNameValuePair("mues", mues));
+			nvp.add(new BasicNameValuePair("psw", psw));
+			
+			httpPost.setEntity(new UrlEncodedFormEntity(nvp));
+			
+			//Si responde, ejecutamos
+			HttpResponse httpResponse=httpClient.execute(httpPost);
+			//obtenemos respusta
+			HttpEntity httpEntity=httpResponse.getEntity();
+			is=httpEntity.getContent();
+						
+		}catch (ClientProtocolException e) {
+Log.e("webservice","ClientProtocol"+e.toString());			// TODO: handle exception
+		}catch (IOException e) {
+			// TODO: handle exception
+Log.e("webservice","ioException"+e.toString());			
+		}
+		
+		//convertimos respuesta a string
+		try{
+			BufferedReader bf=new BufferedReader
+					(new InputStreamReader(is,"utf-8"),8);
 			StringBuilder sb=new StringBuilder();
 			String line=null;
 			while((line=bf.readLine())!=null){

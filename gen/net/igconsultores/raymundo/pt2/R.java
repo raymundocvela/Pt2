@@ -111,7 +111,8 @@ public final class R {
         public static final int confComp=0x7f06001b;
         public static final int confDelPrefs=0x7f060023;
         public static final int confDesc=0x7f060018;
-        public static final int confReadAlertMsg=0x7f06002d;
+        public static final int confReadAlertDelMsg=0x7f060032;
+        public static final int confReadAlertEditMsg=0x7f060031;
         public static final int confReadEdit=0x7f060021;
         public static final int confTit=0x7f060019;
         public static final int confUser=0x7f060017;
@@ -125,9 +126,9 @@ public final class R {
         public static final int mainTit=0x7f06001d;
         public static final int menuAcer=0x7f06002b;
         public static final int menuConf=0x7f06002a;
-        public static final int menuDelPrefs=0x7f060030;
-        public static final int menuEditPrefs=0x7f060031;
-        public static final int no=0x7f06002e;
+        public static final int menuDelPrefs=0x7f06002f;
+        public static final int menuEditPrefs=0x7f060030;
+        public static final int no=0x7f06002d;
         public static final int pswGetTxt=0x7f06001c;
         public static final int pswSetConf=0x7f060016;
         public static final int pswSetHint=0x7f060014;
@@ -148,7 +149,7 @@ public final class R {
         public static final int sample_pref_summary=0x7f060009;
         public static final int sample_pref_txt_dialog=0x7f06000d;
         public static final int version=0x7f060029;
-        public static final int yes=0x7f06002f;
+        public static final int yes=0x7f06002e;
     }
     public static final class xml {
         public static final int samplepreferences=0x7f040000;
