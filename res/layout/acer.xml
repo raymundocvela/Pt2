@@ -16,5 +16,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/acerTxt" android:gravity="center_vertical|center_horizontal"/>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Versión" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|top"
+            android:text="@string/version" />
+
+    </LinearLayout>
 
 </LinearLayout>

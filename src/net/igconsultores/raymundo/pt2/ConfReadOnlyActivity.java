@@ -10,9 +10,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -73,18 +70,33 @@ public class ConfReadOnlyActivity extends Activity {
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {  
+		final AlertDialog.Builder builder = new AlertDialog.Builder(ConfReadOnlyActivity.this);
+		final AlertDialog alertDialog;
 		final SharedPreferences prefs=getSharedPreferences("datos", Context.MODE_WORLD_WRITEABLE);
 		switch (item.getItemId()) {  
 		case R.id.itemEdit:  
-			
-			prefs.edit().putBoolean("update", true);
-			finish();
-			Intent intConfW=new Intent(ConfReadOnlyActivity.this,ConfActivity.class);
-			startActivity(intConfW);
-			break;
+			  			
+					builder.setMessage(R.string.confReadAlertEditMsg)
+					.setCancelable(false)
+					.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							prefs.edit().putBoolean("update", true);
+							finish();
+							Intent intConfW=new Intent(ConfReadOnlyActivity.this,ConfActivity.class);
+							startActivity(intConfW);				     
+						}
+					})
+					.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int id) {
+							// put your code here 
+							dialog.cancel();
+						}
+					});
+					alertDialog = builder.create();
+					alertDialog.show(); 
+				 			break;
 		case R.id.itemDelPrefs: 
-			AlertDialog.Builder builder = new AlertDialog.Builder(ConfReadOnlyActivity.this);
-			builder.setMessage(R.string.confReadAlertMsg)
+			builder.setMessage(R.string.confReadAlertDelMsg)
 			.setCancelable(false)
 			.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 				public void onClick(DialogInterface dialog, int id) {
@@ -102,7 +114,7 @@ public class ConfReadOnlyActivity extends Activity {
 					dialog.cancel();
 				}
 			});
-			AlertDialog alertDialog = builder.create();
+			alertDialog = builder.create();
 			alertDialog.show();  
 			break;
 		default:

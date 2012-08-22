@@ -154,10 +154,10 @@ public class ConfActivity extends Activity {
 						Log.d("responsePhp","usuario no insertado"+responsePhp);
 					}
 					
-				}
+				}//enviar datos
 
-			}
-		});
+			}//onclick
+		});//listener
 		
 	}//onCreate
 	

@@ -32,14 +32,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CompoundButton;
@@ -533,7 +530,7 @@ public class MainActivity extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("El GPS esta deshabilitado, quieres habilitarlo ahora?\nRecuerda: PRESIONAR EL BOTON \"ATRAS\"para volver a esta aplicación")
 		.setCancelable(false)
-		.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+		.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				Intent intGpsSettings = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
@@ -541,7 +538,7 @@ public class MainActivity extends Activity {
 				//Toast.makeText(this, "Presiona la tecla de atrás para volver a la aplicación MobileHunt", Toast.LENGTH_LONG).show();
 			}
 		})
-		.setNegativeButton("No", new DialogInterface.OnClickListener() {
+		.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) { 
 				dialog.cancel();
