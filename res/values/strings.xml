@@ -56,10 +56,9 @@ Este programa te permitirá:\n-Registrar las coordenadas de este dispositivo mó
     <string name="menuConf">Configuración</string>
     <string name="menuAcer">Acerca de</string>
     <string name="MainModLoc">Obtener datos del:</string>
+    <string name="confReadAlertMsg">¿Seguro que deseas borrar los datos de la aplicación e iniciar el asistente de configuración?</string>
     <string name="no">No</string>
     <string name="yes">Si</string>
     <string name="menuDelPrefs">Borrar Configuración</string>
     <string name="menuEditPrefs">Editar Configuración</string>
-    <string name="confReadAlertEditMsg">¿Seguro que deseas actualizar estos datos?</string>
-    <string name="confReadAlertDelMsg">¿Seguro que deseas borrar los datos de la aplicación e iniciar el asistente de configuración?</string>
 </resources>
