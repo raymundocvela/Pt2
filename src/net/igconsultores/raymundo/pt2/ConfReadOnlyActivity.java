@@ -27,6 +27,7 @@ public class ConfReadOnlyActivity extends Activity {
 		final EditText etUsr=(EditText) findViewById(R.id.confRo_editText1Usr);
 		final EditText etDesc=(EditText) findViewById(R.id.confRo_editText2Desc);
 		final EditText etComp=(EditText) findViewById(R.id.confRo_editText3Comp);
+		final EditText etMail=(EditText) findViewById(R.id.editText_confMail);
 		final TextView tvTime=(TextView) findViewById(R.id.confRo_textView6time);
 //		final Button btnEdit=(Button) findViewById(R.id.confRo_button1Edit);
 //		final Button btnDelPrefs=(Button) findViewById(R.id.button1_confRo_DelPrefs);
@@ -34,6 +35,7 @@ public class ConfReadOnlyActivity extends Activity {
 		etUsr.setText(prefs.getString("usr", "sin dato").toString());
 		etDesc.setText(prefs.getString("desc", "sin dato").toString());
 		etComp.setText(prefs.getString("comp", "sin dato").toString());
+		etMail.setText(prefs.getString("mail", "sin dato").toString());
 		tvTime.setText(prefs.getInt(Constantes.keyMuestreo, 0)+"min");
 				
 		//tvTime.setText(prefs.getString("mues", null));

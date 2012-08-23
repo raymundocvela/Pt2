@@ -89,12 +89,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/confMail" />
-
+
                 <EditText
                     android:id="@+id/editText_confMail"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" />
+                    android:ems="10" android:clickable="false" android:focusable="false" android:focusableInTouchMode="false"/>
 
                 <LinearLayout
                     android:layout_width="fill_parent"

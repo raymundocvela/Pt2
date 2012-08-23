@@ -75,6 +75,7 @@ public class ConfActivity extends Activity {
 			etUsr.setText(prefs.getString("usr", "sin dato").toString());
 			etDesc.setText(prefs.getString("desc", "sin dato").toString());
 			etComp.setText(prefs.getString("comp", "sin dato").toString());
+			etMail.setText(prefs.getString("mail", "raymundoc.vela@hotmail.com").toString());
 			tvMues.setText(progresssb+"min");
 			sbMues.setProgress(prefs.getInt(Constantes.keyMuestreo, 0));
 		}
@@ -111,10 +112,11 @@ public class ConfActivity extends Activity {
 				String usr=etUsr.getText().toString();
 				String desc=etDesc.getText().toString();
 				String comp=etComp.getText().toString();
+				String mail=etMail.getText().toString();
 				
 						
 				//if(etUsr.getText().toString().equals("")||etDesc.getText().toString().equals("")){
-				if(usr.equals("")||desc.equals("")||comp.equals("")){
+				if(usr.equals("")||desc.equals("")||comp.equals("")||mail.equals("")){
 					Toast toast = Toast.makeText(ConfActivity.this, "Todos los datos son obligatorios",Toast.LENGTH_LONG);
 					toast.show();
 				}
@@ -129,21 +131,23 @@ public class ConfActivity extends Activity {
 					//Bundle bundle=getIntent().getExtras();
 					//String psw=bundle.getString("psw");
 					//editor.putInt("psw",Integer.parseInt(psw));
-//PONER ESTO EN EL IF 					
-					editor.putString("usr",usr);
-					editor.putString("desc",desc);
-					editor.putString("comp",comp);
-					//progresssb=sbMues.getProgress();
-					editor.putInt("mues",progresssb);
-					editor.putString("bestProv","GPS_PROVIDER");
-					editor.commit();
-					Log.d("prefs", "preferencias guardadas-progressb"+progresssb);
+ 					
 					String psw=prefs.getString("psw", "sindato");
-					Log.e("sendData",usr+"-"+comp+"-"+desc+"-"+Integer.toString(progresssb)+"-"+psw);
-					String responsePhp=sendData(usr, comp, desc, Integer.toString(progresssb),psw);
+					Log.e("sendData",usr+"-"+comp+"-"+desc+"-"+mail+"-"+Integer.toString(progresssb)+"-"+psw);
+					String responsePhp=sendData(usr, comp, desc,mail, Integer.toString(progresssb),psw);
 					Log.e("responsePhp",responsePhp);
 					
 					if(responsePhp.contains("_1")){
+						editor.putString("usr",usr);
+						editor.putString("desc",desc);
+						editor.putString("comp",comp);
+						editor.putString("mail",mail);
+						
+						//progresssb=sbMues.getProgress();
+						editor.putInt("mues",progresssb);
+						editor.putString("bestProv","GPS_PROVIDER");
+						editor.commit();
+						Log.d("prefs", "preferencias guardadas-progressb"+progresssb);
 						finish();
 						Intent intMain = new Intent(ConfActivity.this, MainActivity.class);
 						startActivity(intMain);	
@@ -163,7 +167,7 @@ public class ConfActivity extends Activity {
 	}//onCreate
 	
 	
-	public String sendData(String usr, String comp, String desc, String mues, String psw){
+	public String sendData(String usr, String comp, String desc, String mail, String mues, String psw){
 		HttpClient httpClient= new DefaultHttpClient();
 		HttpPost httpPost=new HttpPost(wsGetDataUrl);
 		InputStream is=null;
@@ -174,6 +178,7 @@ public class ConfActivity extends Activity {
 			nvp.add(new BasicNameValuePair("usr", usr));
 			nvp.add(new BasicNameValuePair("comp", comp));
 			nvp.add(new BasicNameValuePair("desc", desc));
+			nvp.add(new BasicNameValuePair("mail", mail));
 			nvp.add(new BasicNameValuePair("mues", mues));
 			nvp.add(new BasicNameValuePair("psw", psw));
 			
@@ -195,7 +200,7 @@ Log.e("webservice","ioException"+e.toString());
 		//convertimos respuesta a string
 		try{
 			BufferedReader bf=new BufferedReader
-					(new InputStreamReader(is,"iso-8859-1"),8);
+					(new InputStreamReader(is,"utf-8"),8);
 			StringBuilder sb=new StringBuilder();
 			String line=null;
 			while((line=bf.readLine())!=null){

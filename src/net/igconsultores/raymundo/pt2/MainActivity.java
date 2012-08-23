@@ -153,7 +153,7 @@ public class MainActivity extends Activity {
 					tvLong.setText("Longitud: " + lonx);
 					tvPres.setText("Precision: " + String.valueOf(location.getAccuracy()));			
 					Date date=new Date(location.getTime());
-					tvTimes.setText("TimesStamp: "+ timeStamp+"\n"+"date: "+date.toString());
+					tvTimes.setText("TimesStamp: "+ timeStamp+"\n"+"Date: "+date.toString());
 
 					//verificar q no se hayan insertado
 					lastSendTime=prefs.getString("lastSendTime", "0");
@@ -173,8 +173,8 @@ public class MainActivity extends Activity {
 							Log.e("responsePhp",responsePhp);
 							if(responsePhp.contains("_1")){
 								Log.d("ws"," Loc insertada");
-								prefs.edit().putString("lastSendLonx",laty).commit();
-								prefs.edit().putString("lastSendLaty",lonx).commit();
+								prefs.edit().putString("lastSendLonx",lonx).commit();
+								prefs.edit().putString("lastSendLaty",laty).commit();
 								prefs.edit().putString("lastSendTime",timeStamp).commit();
 								cont=0;
 							}
@@ -393,7 +393,7 @@ public class MainActivity extends Activity {
 			tvLong.setText("lastLongitud: " + lastLonx);
 			tvPres.setText("Precision: " + String.valueOf(locationMobile.getAccuracy()));			
 			Date date=new Date(locationMobile.getTime());
-			tvTimes.setText("TimesStamp: "+ lastTime+"\n"+ "date.tostring:"+date.toString());
+			tvTimes.setText("TimesStamp: "+ lastTime+"\n"+ "Date: "+date.toString());
 			Log.e("if", "Obtuve ultima posición");
 			//				lastSendLonx=prefs.getString("lastSendLonx", "0");
 			//				lastSendLaty=prefs.getString("lastSendLaty", "0");
@@ -428,7 +428,7 @@ public class MainActivity extends Activity {
 					}
 				}while(!responsePhp.contains("_1")&&cont<5);
 
-				prefs.edit().putString("responsePHP", responsePhp).commit();
+				//prefs.edit().putString("responsePHP", responsePhp).commit();
 				//Verificamos si la localización o punto está dentro del poligono o restricción				
 				Log.v("var wsContainPto","valor inicial variable "+ wsContainPto);
 				//contain(lastLaty, lastLonx, responsePhp);
@@ -626,7 +626,7 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 	}
 	
 	//Enviar mail administrador
-	public String sendMail(String usr, String laty, String lonx, String bestProv){
+	public String sendMail(String usr, String laty, String lonx, String comp, String desc, String mail, String bestProv){
 		HttpClient httpClient= new DefaultHttpClient();
 		HttpPost httpPost=new HttpPost(wsSendMail);
 		InputStream is=null;
@@ -637,6 +637,9 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			nvp.add(new BasicNameValuePair("usr", usr));
 			nvp.add(new BasicNameValuePair("laty", laty));
 			nvp.add(new BasicNameValuePair("lonx", lonx));
+			nvp.add(new BasicNameValuePair("comp", comp));
+			nvp.add(new BasicNameValuePair("desc", desc));
+			nvp.add(new BasicNameValuePair("mail", mail));
 			nvp.add(new BasicNameValuePair("bestprov", bestProv));
 
 			httpPost.setEntity(new UrlEncodedFormEntity(nvp));
@@ -739,8 +742,12 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			String usr=prefs.getString("usr", "sin dato");
 			String laty=prefs.getString("lastSendLaty", "sin dato");
 			String lonx=prefs.getString("lastSendLonx", "sin dato");
+			String comp=prefs.getString("comp", "sin dato");
+			String desc=prefs.getString("desc", "sin dato");
+			String mail=prefs.getString("mail", "raymundoc.vela@hotmail.com");
 			//String timeStamp=prefs.getString("lastSendTime", "sin dato");
-			String responsePhp=sendMail(usr, laty, lonx, bestProv);
+			Log.v("SendMail",usr+" 1/"+laty+" 2/"+lonx+" 3/"+comp+" 4/"+desc+" 5/"+mail+" 6/"+bestProv);
+			String responsePhp=sendMail(usr, laty, lonx, comp, desc, mail, bestProv);
 			Log.v("SendMail","responsePhp: "+responsePhp);
 			mp.start();
 			
