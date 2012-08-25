@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.security.KeyStore.LoadStoreParameter;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -169,18 +170,17 @@ public class MainActivity extends Activity {
 			if(!lastTime.equals(lastSendTime)){
 				String responsePhp;
 				String usr=prefs.getString("usr", "sin dato");
-				String timeStamp=String.valueOf(locationMobile.getTime());
 				int cont=0;
 				//Enviamos Datos al WS
 				//si no se guarda localización se intenta mandar  5 veces
 				do{					
-					Log.e("sendData",usr+"/"+ lastLaty+"/"+lastLonx+"/"+ timeStamp+"/"+bestProv);
-					responsePhp=sendLoc(usr,lastLaty,lastLonx,timeStamp, bestProv);
+					Log.e("sendData",usr+"/"+ lastLaty+"/"+lastLonx+"/"+ lastTime+"/"+bestProv);
+					responsePhp=sendLoc(usr,lastLaty,lastLonx,lastTime, bestProv);
 					Log.e("responsePhp",responsePhp);
 					if(responsePhp.contains("_1")){
 						Log.d("ws"," Loc insertada");						
 						//agregamos nuevos valores
-						prefs.edit().putString("lastSendLonx",lastTime).commit();
+						prefs.edit().putString("lastSendTime",lastTime).commit();
 						prefs.edit().putString("lastSendLonx",lastLonx).commit();
 						prefs.edit().putString("lastSendLaty",lastLaty).commit();
 						cont=0;
@@ -213,10 +213,11 @@ public class MainActivity extends Activity {
 		//pasamos minutos a  milisegundos
 		minTime=prefs.getInt(Constantes.keyMuestreo, 0)*(1000*60);
 		Log.e("Location", "tiempo muestreo cada:"+minTime+"milisegundos , distancia min: "+minDistancia);
-		locMana.requestLocationUpdates(bestProv, minTime, minDistancia, locList);
 
 
-//Listeners
+
+//LISTENERS
+		//Location Listener
 		locList=new LocationListener() {
 			@Override
 			public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -246,17 +247,8 @@ public class MainActivity extends Activity {
 				//mostrarLocalizacion(location);
 				Log.e("listener", "Cambio de localizacion: "+location);
 				if(location!=null){	
-					/*
-					String laty = String.valueOf(df.format(location.getLatitude()));
-					String lonx= String.valueOf(df.format(location.getLongitude()));
-					 */
 					String laty = df.format(location.getLatitude());
 					String lonx= df.format(location.getLongitude());
-
-					/*
-					String laty = String.valueOf(location.getLatitude());
-					String lonx= String.valueOf(location.getLongitude());
-					 */
 					String timeStamp=String.valueOf(location.getTime());
 
 
@@ -273,13 +265,11 @@ public class MainActivity extends Activity {
 					if(!lastSendTime.equals(timeStamp)){						
 						String responsePhp;
 						String usr=prefs.getString("usr", "sin dato");							
-						bestProv= prefs.getString("bestProv", "sin dato");
+						//bestProv= prefs.getString("bestProv", "sin dato");
 						int cont=0;
-
 						//Enviamos Datos al WS
-						//SharedPreferences prefs= getSharedPreferences(Constantes.prefsName, Context.MODE_WORLD_WRITEABLE);
+						//si no se guarda localización se intenta mandar  5 veces
 						do{
-
 							Log.e("sendData",usr+"/"+ laty+"/"+lonx+"/"+ timeStamp+"/"+bestProv);
 							responsePhp=sendLoc(usr, laty, lonx, timeStamp, bestProv);
 							Log.e("responsePhp",responsePhp);
@@ -297,25 +287,18 @@ public class MainActivity extends Activity {
 						}while(!responsePhp.contains("_1")&&cont<5);
 
 						//Verificamos si la localización o punto está dentro del poligono o restricción
-						prefs.edit().putString("responsePHP", responsePhp).commit();
+						//prefs.edit().putString("responsePHP", responsePhp).commit();
 						contain(laty, lonx);
 						//SystemClock.sleep(500);
 						Log.v("contain","La restricción contiene a la localización?:"+wsContainPto);
 						wsContainPto="sin Dato";
 						Log.v("FIN","verificación COMPLETA");
-
-					}
-
-				}
-			}
-
-		};
-
-
-
-
-
-
+					}//if timestamp
+				}//if
+			}//Changed
+		};//Listener
+		//Solicitud de actualizacions segun proveedor
+		locMana.requestLocationUpdates(bestProv, minTime, minDistancia, locList);
 
 
 		//Listener Proveedor
@@ -326,7 +309,7 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				if (rBtnGps.isChecked()){
 					Log.d("locmana:", "eliminar update "+bestProv);
-					bestProv="GPS_PROVIDER";					
+					bestProv=LocationManager.GPS_PROVIDER;					
 					//					LocManProvider=getLocManProvider(bestProv);
 					Log.d("if", "Gps esta habilitado?"+locMana.isProviderEnabled(LocationManager.GPS_PROVIDER));
 					if(!locMana.isProviderEnabled(LocationManager.GPS_PROVIDER)){
@@ -344,7 +327,7 @@ public class MainActivity extends Activity {
 					//minTime=prefs.getInt(Constantes.keyMuestreo, 0)*(1000*60);
 					Log.e("Location", "tiempo muestreo cada:"+minTime+"milisegundos\n Distancia minima: "+minDistancia);
 					//si es caminando distancia minima a recoger es 66m, 60 min 4km/hr ,  si es en carro cada 500m  20 o 30 km/hr datos Hresendiz 
-					locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
+					locMana.requestLocationUpdates(bestProv, minTime, minDistancia, locList);
 					Log.d("Location:", "nuevo update "+bestProv);
 				}
 				else Log.d("OnchekedGps:", "Gps Radio no seleccionado "+bestProv);
@@ -357,7 +340,7 @@ public class MainActivity extends Activity {
 				// TODO Auto-generated method stub
 				if (rBtnNw.isChecked()){
 					Log.d("locmana", "eliminar update "+bestProv);
-					bestProv="NETWORK_PROVIDER";
+					bestProv=LocationManager.NETWORK_PROVIDER;
 					prefs.edit().putString("bestProv",bestProv).commit();
 					Log.d("Mejor Proveedor", "Guardado "+bestProv);
 
@@ -373,7 +356,6 @@ public class MainActivity extends Activity {
 				else Log.d("OnchekedNW:", "Nw Radio no seleccionado "+bestProv);
 			}
 		});
-
 
 
 		//Modo de traslado Listener
@@ -437,16 +419,17 @@ public class MainActivity extends Activity {
 					//crear una nueva
 					minTime=prefs.getInt(Constantes.keyMuestreo, 0)*(1000*60);
 					Log.e("Location", "tiempo muestreo cada:"+minTime+" "+Constantes.keyMuestreo+"min , distancia min: "+minDistancia);
-					//si es caminando distancia minima a recoger es 66m, 60 min 4km/hr ,  si es en carro cada 500m  20 o 30 km/hr datos Hresendiz 
+					locMana.requestLocationUpdates(bestProv, minTime, minDistancia, locList);
+					Log.d("Location:", "Auto GPS Update Loc "+ bestProv);
 
-					if (bestProv.equals("GPS_PROVIDER")){
-						locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
-						Log.d("Location:", "Auto GPS Update Loc "+ bestProv);
-					}
-					else {
-						locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
-						Log.d("Location:", " update Loc "+ bestProv);
-					}
+//					if (bestProv.equals("GPS_PROVIDER")){
+//						locMana.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistancia, locList);
+//						Log.d("Location:", "Auto GPS Update Loc "+ bestProv);
+//					}
+//					else {
+//						locMana.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, minTime, minDistancia, locList);
+//						Log.d("Location:", " update Loc "+ bestProv);
+//					}
 
 				}
 				//				else Log.d("modoTrasAuto:", "NO Guardado "+modoTraslado);
@@ -513,14 +496,14 @@ public class MainActivity extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Salir de la aplicación?\n**Puedes presionar el botón \"HOME\" para cambiar de aplicación")
 		.setCancelable(false)
-		.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+		.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				finish();
 				//Toast.makeText(this, "Presiona la tecla de atrás para volver a la aplicación MobileHunt", Toast.LENGTH_LONG).show();
 			}
 		})
-		.setNegativeButton("No", new DialogInterface.OnClickListener() {
+		.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) { 
 				dialog.cancel();
@@ -587,7 +570,9 @@ Log.i("", String.valueOf(loc.getLatitude() + " - " + String.valueOf(loc.getLongi
 			nvp.add(new BasicNameValuePair("laty", laty));
 			nvp.add(new BasicNameValuePair("lonx", lonx));
 			nvp.add(new BasicNameValuePair("timestamp", timeStamp));
-			nvp.add(new BasicNameValuePair("bestprov", bestProv));
+			
+			if(bestProv.contains("GPS"))nvp.add(new BasicNameValuePair("bestprov", "GPS"));
+			else nvp.add(new BasicNameValuePair("bestprov", "NETWORK"));
 
 
 			httpPost.setEntity(new UrlEncodedFormEntity(nvp));
