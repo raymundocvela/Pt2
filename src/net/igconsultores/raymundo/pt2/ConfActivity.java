@@ -25,6 +25,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -145,7 +146,7 @@ public class ConfActivity extends Activity {
 						
 						//progresssb=sbMues.getProgress();
 						editor.putInt("mues",progresssb);
-						editor.putString("bestProv","GPS_PROVIDER");
+						editor.putString("bestProv",LocationManager.GPS_PROVIDER);
 						editor.commit();
 						Log.d("prefs", "preferencias guardadas-progressb"+progresssb);
 						finish();
