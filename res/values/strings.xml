@@ -42,7 +42,7 @@ Este programa te permitirá:\n-Registrar las coordenadas de este dispositivo mó
     <string name="pswGetTxt">Ingresa la contraseña de ADMINISTRADOR</string>
     <string name="mainTit">Mi Ubicación</string>
     <string name="acerTit">Acerca de</string>
-    <string name="acerTxt">Esta aplicación se implemento y diseño en el año 2012 con el fin de la aprobación del Proyecto Terminal 2 de la Carrera de Ingeniería en Computación UAM Azcapotzalco.\nComentarios:\nraymundoc.vela@hotmail.com\n Jorge Raymundo Castillo Velázquez</string>
+    <string name="acerTxt">Esta aplicación se implementó y diseñó en el año 2012 con el fin de la aprobación del Proyecto Terminal 2 de la Carrera de Ingeniería en Computación UAM Azcapotzalco.\nComentarios:\nraymundoc.vela@hotmail.com\n Jorge Raymundo Castillo Velázquez</string>
     <string name="mainBestp">Mejor Proveedor</string>
     <string name="confReadEdit">Editar</string>
     <string name="mainPsw">-Cambiar contraseña</string>
