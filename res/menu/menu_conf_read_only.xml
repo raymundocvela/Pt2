@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-    <item android:id="@+id/itemDelPrefs" android:title="@string/menuDelPrefs"></item>
-    <item android:id="@+id/itemEdit" android:title="@string/menuEditPrefs"></item>
+    <item android:id="@+id/itemDelPrefs" android:title="@string/menuDelPrefs" android:icon="@android:drawable/ic_menu_delete"></item>
+    <item android:id="@+id/itemEdit" android:title="@string/menuEditPrefs" android:icon="@android:drawable/ic_menu_edit"></item>
     
 
 </menu>

@@ -1,5 +1,5 @@
 
     <menu xmlns:android="http://schemas.android.com/apk/res/android">
-        <item android:id="@+id/itemConf"  android:title="@string/menuConf" android:checkable="true" android:visible="true"></item>
-        <item android:id="@+id/itemAcer" android:title="@string/menuAcer"></item>
+        <item android:id="@+id/itemConf"  android:title="@string/menuConf" android:icon="@android:drawable/ic_menu_manage" android:checkable="true" android:visible="true"></item>
+        <item android:id="@+id/itemAcer" android:title="@string/menuAcer" android:icon="@android:drawable/ic_menu_info_details"></item>
     </menu>

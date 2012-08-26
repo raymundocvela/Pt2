@@ -53,6 +53,6 @@ public class SplashActivity extends Activity {
 		};
 
 		Timer tm = new Timer();
-		tm.schedule(tmTsk, 1500);
+		tm.schedule(tmTsk, 3000);//en milisegundos
 	}//Fin onCreate
 }//fin Activity

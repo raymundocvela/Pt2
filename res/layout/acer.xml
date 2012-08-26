@@ -24,27 +24,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="left|center_vertical"
-                    android:text="@string/acerTxt" android:typeface="serif"/>
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="wrap_content"
+                    android:text="@string/acerTxt" android:typeface="serif" android:textStyle="bold" android:padding="5dip"/>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:text="Versión" android:padding="2sp" android:textStyle="bold"/>
+                    android:gravity="center" >
 
-                <TextView
-                    android:id="@+id/textView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="bottom|top"
-                    android:text="@string/version" android:padding="2sp" android:textStyle="bold"/>
-
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="2sp"
+                        android:text="Versión"
+                        android:textSize="20dip"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="bottom|top"
+                        android:padding="2sp"
+                        android:text="@string/version"
+                        android:textSize="20dip"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+                </LinearLayout>
+
                 <ImageView
                     android:id="@+id/imageView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5sp"
-                    android:scaleType="fitCenter"
+                    android:padding="5dip"
+                    android:scaleType="fitStart"
                     android:src="@drawable/logouam_medium" />
 
             </LinearLayout>
