@@ -4,20 +4,20 @@
     android:layout_height="fill_parent"
     android:layout_margin="2dip"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical" android:padding="5dip">
 
     <TextView
         android:id="@+id/pswGetTit_textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/pswSetTit"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge" android:typeface="serif" android:textStyle="bold" android:textSize="25sp"/>
 
     <TextView
         android:id="@+id/pswGetTxt_textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pswGetTxt" />
+        android:text="@string/pswGetTxt" android:typeface="serif" android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/pswGet_editText1"
@@ -29,7 +29,7 @@
         android:layout_marginTop="5dip"
         android:gravity="center_vertical|center_horizontal"
         android:hint="@string/pswSetHint"
-        android:inputType="phone" android:digits="123456789" android:maxLength="4" android:password="true">
+        android:inputType="phone" android:digits="123456789" android:maxLength="4" android:password="true" android:typeface="serif">
 
         <requestFocus />
     </EditText>
@@ -38,6 +38,6 @@
         android:id="@+id/pswGetAcep_button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/aceptar" />
+        android:text="@string/aceptar" android:typeface="serif"/>
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     android:layout_height="fill_parent"
     android:layout_margin="2dip"
     android:orientation="vertical"
-    android:padding="5sp" >
+    android:padding="5dip" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/confTit"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:textAppearance="?android:attr/textAppearanceLarge" android:typeface="serif" android:textStyle="bold" android:textSize="25sp"/>
     </LinearLayout>
 
     <ScrollView
@@ -27,7 +27,7 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent" >
-
+
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
@@ -37,11 +37,14 @@
                     android:id="@+id/confRo_textView4Comp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/confComp" />
+                    android:padding="2dip"
+                    android:text="@string/confComp"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
 
                 <EditText
                     android:id="@+id/confRo_editText3Comp"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="false"
@@ -56,11 +59,14 @@
                     android:id="@+id/confRo_textView2Usr"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/confUser" />
+                    android:padding="2dip"
+                    android:text="@string/confUser"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
 
                 <EditText
                     android:id="@+id/confRo_editText1Usr"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="false"
@@ -72,11 +78,14 @@
                     android:id="@+id/confRo_textView3Desc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/confDesc" />
+                    android:padding="2dip"
+                    android:text="@string/confDesc"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
 
                 <EditText
                     android:id="@+id/confRo_editText2Desc"
-                    android:layout_width="fill_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:clickable="false"
@@ -88,13 +97,19 @@
                     android:id="@+id/textView_confMail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/confMail" />
+                    android:padding="2dip"
+                    android:text="@string/confMail"
+                    android:textStyle="bold"
+                    android:typeface="serif" />
 
                 <EditText
                     android:id="@+id/editText_confMail"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10" android:clickable="false" android:focusable="false" android:focusableInTouchMode="false"/>
+                    android:clickable="false"
+                    android:ems="10"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -105,13 +120,19 @@
                         android:id="@+id/confRo_textView5Mues"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/ConfMues" />
+                        android:padding="2dip"
+                        android:text="@string/ConfMues"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
 
                     <TextView
                         android:id="@+id/confRo_textView6time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="TextView" />
+                        android:padding="2dip"
+                        android:text="TextView"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
                 </LinearLayout>
             </LinearLayout>
 

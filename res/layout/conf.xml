@@ -3,14 +3,23 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:gravity="center_horizontal"
-    android:orientation="vertical" android:padding="2dip">
+    android:orientation="vertical" android:padding="5dip">
 
     <TextView
         android:id="@+id/confTit_textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/confTit"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge" android:textStyle="bold" android:typeface="serif" android:textSize="25sp"/>
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|clip_horizontal"
+        android:padding="2dip"
+        android:text="@string/confMsj"
+        android:typeface="serif" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -40,7 +49,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="2dip"
-                        android:text="@string/confComp" />
+                        android:text="@string/confComp" android:textStyle="bold" android:typeface="serif"/>
 
                     <EditText
                         android:id="@+id/confComp_editText"
@@ -57,7 +66,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="5dip"
-                    android:text="@string/confUser" />
+                    android:text="@string/confUser" android:textStyle="bold" android:typeface="serif"/>
 
                 <EditText
                     android:id="@+id/confUsr_editText1"
@@ -70,7 +79,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingTop="2dip"
-                    android:text="@string/confDesc" />
+                    android:text="@string/confDesc" android:textStyle="bold" android:typeface="serif"/>
 
                 <EditText
                     android:id="@+id/confDesc_editText2"
@@ -82,7 +91,7 @@
                     android:id="@+id/textView_confMail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/confMail" />
+                    android:text="@string/confMail" android:textStyle="bold" android:typeface="serif"/>
 
                 <EditText
                     android:id="@+id/editText_confMail"
@@ -101,7 +110,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingTop="2dip"
-                        android:text="@string/ConfMues" />
+                        android:text="@string/ConfMues" android:textStyle="bold" android:typeface="serif"/>
 
                     <TextView
                         android:id="@+id/confMues_textView5"

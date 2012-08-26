@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" android:gravity="center_horizontal">
+    android:orientation="vertical" android:gravity="center_horizontal" android:padding="5dip">
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/acerTit"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge" android:typeface="serif" android:textSize="25sp" android:textStyle="bold"/>
     <ScrollView android:id="@+id/scrollView1" android:layout_width="fill_parent" android:layout_height="wrap_content">
         <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
 
@@ -23,28 +23,30 @@
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical|center_horizontal"
-                    android:text="@string/acerTxt" />
+                    android:gravity="left|center_vertical"
+                    android:text="@string/acerTxt" android:typeface="serif"/>
 
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Versión" />
+                    android:text="Versión" android:padding="2sp" android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="bottom|top"
-                    android:text="@string/version" />
-
+                    android:text="@string/version" android:padding="2sp" android:textStyle="bold"/>
+
                 <ImageView
                     android:id="@+id/imageView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/logouam_medium" android:padding="5sp"/>
+                    android:padding="5sp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/logouam_medium" />
+
             </LinearLayout>
 
         </LinearLayout>

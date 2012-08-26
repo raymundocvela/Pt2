@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical" android:background="">
    
     <TextView
         android:id="@+id/mainTit_textView1"
@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:text="@string/mainTit"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25sp" android:padding="5sp"/>
+        android:textSize="25sp" android:padding="5sp" android:textStyle="bold" android:typeface="serif"/>
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dip"
-                android:text="Esperando información....\nLatitud: " />
+                android:text="Esperando información....\nLatitud: " android:typeface="serif"/>
 
             <TextView
                 android:id="@+id/textView4MainLongTxt"
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dip"
-                android:text="Longitud :" />
+                android:text="Longitud :" android:typeface="serif"/>
 
             <TextView
                 android:id="@+id/textView1MainPres"
@@ -49,7 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dip"
-                android:text="Presición:" />
+                android:text="Presición:" android:typeface="serif"/>
 
             <TextView
                 android:id="@+id/textView2MainTimes"
@@ -57,13 +57,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dip"
-                android:text="TimeStamp:" />
+                android:text="TimeStamp:" android:typeface="serif"/>
 
             <TextView
                 android:id="@+id/textViewMainModLoc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/MainModLoc" android:textSize="15sp"/>
+                android:text="@string/MainModLoc" android:textSize="15sp" android:textStyle="bold" android:typeface="serif" android:padding="5dip"/>
 
             <RadioGroup
                 android:id="@+id/radioGroup1MainLoc"
@@ -76,13 +76,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/mainGps" />
+                    android:text="@string/mainGps" android:typeface="serif"/>
 
                 <RadioButton
                     android:id="@+id/radio1MainNw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mainNW" />
+                    android:text="@string/mainNW" android:typeface="serif"/>
             </RadioGroup>
             <!--
             <Button
@@ -97,7 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mainModo"
-                android:textSize="15sp"/>
+                android:textSize="15sp" android:textStyle="bold" android:typeface="serif" android:paddingTop="5dip"/>
 
 <RadioGroup
     android:id="@+id/radioGroupMainModo"
@@ -109,13 +109,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:text="@string/mainPie" />
+        android:text="@string/mainPie" android:typeface="serif"/>
 
     <RadioButton
         android:id="@+id/radioMainAuto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mainAuto" />
+        android:text="@string/mainAuto" android:typeface="serif"/>
 </RadioGroup>
 <!-- 
 

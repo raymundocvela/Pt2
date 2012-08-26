@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
         android:text="@string/bienv"
-        android:textAppearance="?android:attr/textAppearanceLarge" android:padding="5sp"/>
+        android:textAppearance="?android:attr/textAppearanceLarge" android:padding="5sp" android:typeface="serif" android:textStyle="bold"/>
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -29,7 +29,7 @@
                 android:layout_margin="2dip"
                 android:gravity="center|left"
                 android:padding="5sp"
-                android:text="@string/bienvMsj" />
+                android:text="@string/bienvMsj" android:typeface="serif"/>
         </LinearLayout>
     </ScrollView>
 
@@ -43,7 +43,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical|center_horizontal"
-            android:text="@string/aceptar" />
+            android:text="@string/aceptar" android:typeface="serif"/>
 
     </LinearLayout>
 
