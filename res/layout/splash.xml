@@ -9,6 +9,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:adjustViewBounds="true"
-        android:src="@drawable/mobilehunt" />
+        android:scaleType="fitCenter"
+        android:src="@drawable/splash_mundo_android" />
 
 </LinearLayout>

@@ -234,7 +234,7 @@ public class MainActivity extends Activity {
 
 
 
-		//Listener Proveedor de localizacion Global
+		//Listener GPS
 		rBtnGps.setOnCheckedChangeListener(new OnCheckedChangeListener() {			
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
