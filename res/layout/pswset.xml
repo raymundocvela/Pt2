@@ -12,14 +12,16 @@
         android:layout_height="wrap_content"
         android:text="@string/pswSetTit"
         android:textAppearance="?android:attr/textAppearanceLarge" android:typeface="serif" android:textStyle="bold" android:textSize="25sp"/>
-
+
     <TextView
         android:id="@+id/pswSetTxt_textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
         android:padding="5dip"
-        android:text="@string/pswSetTxt" android:typeface="serif" android:textStyle="bold"/>
+        android:text="@string/pswSetTxt"
+        android:textStyle="bold"
+        android:typeface="serif" />
 
     <TextView
         android:id="@+id/textView1"
@@ -52,7 +54,6 @@
         android:visibility="gone" />
 
     <EditText
-        android:textStyle="bold"
         android:typeface="serif"
         android:id="@+id/pswSet_editText2"
         android:layout_width="fill_parent"

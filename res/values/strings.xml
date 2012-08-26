@@ -28,12 +28,12 @@
     </string-array>
     <string name="bienv">BIENVENIDO</string>
     <string name="bienvMsj">Este es el asistente que te guiará en la configuración inicial de tu dispositivo.
-Este programa te permitirá:\n-Registrar las coordenadas de este dispositivo móvil (Smartphone, Tablet, etc…).\n-Enviarlas a un servidor Web.\n-Consultar la información en Tiempo Real con un explorador de Internet con soporte para HTML5 (recomendado Chrome, Firefox)en la página http:\\igconsultores.net\\raymundo.\n- Adicionalmente se podrá establecer una restricción de área a este dispositivo, que al no ser atendida, emitirá una señal de alarma y enviará un mail al administrador de la aplicación reportando el suceso.</string>
+Este programa te permitirá:\n-Registrar las coordenadas de este dispositivo móvil (Smartphone, Tablet, etc…).\n-Enviarlas a un servidor Web.\n-Consultar la información en Tiempo Real en un explorador de Internet con soporte para HTML5 (recomendado Chrome, Firefox) en la página http:\\\\igconsultores.net\\raymundo.\n- Adicionalmente se podrá establecer una restricción de área a este dispositivo, que al no ser atendida, emitirá una señal de alarma y enviará un mail al administrador de la aplicación reportando el suceso.</string>
     <string name="pswSetTxt">Establecer contraseña de Administrador</string>
     <string name="pswSetTit">ADMIN PSW</string>
     <string name="pswSetHint">Ejemplo:1912</string>
     <string name="aceptar">Aceptar</string>
-    <string name="pswSetConf">confirma contraseña</string>
+    <string name="pswSetConf">Confirmar contraseña</string>
     <string name="confUser">Nombre de Usuario</string>
     <string name="confDesc">Descripción del Dispositivo</string>
     <string name="confTit">Configuración</string>
@@ -52,7 +52,7 @@ Este programa te permitirá:\n-Registrar las coordenadas de este dispositivo mó
     <string name="mainPie">A pie</string>
     <string name="mainAuto">En auto</string>
     <string name="mainModo">Modo de traslado:</string>
-    <string name="version">0.9.48</string>
+    <string name="version">0.9.49</string>
     <string name="menuConf">Configuración</string>
     <string name="menuAcer">Acerca de</string>
     <string name="MainModLoc">Obtener datos del:</string>
@@ -63,6 +63,6 @@ Este programa te permitirá:\n-Registrar las coordenadas de este dispositivo mó
     <string name="confReadAlertEditMsg">¿Seguro que deseas actualizar estos datos?</string>
     <string name="confReadAlertDelMsg">Seguro que deseas borrar los datos de la aplicación e iniciar el asistente de configuración?</string>
     <string name="confMail">Mail (Para envió de notificaciones)</string>
-    <string name="confMsj">Estos datos servirán para identificar a este dispositivo en la página web\nhttp:\\igconsultores.net\\raymundo\n</string>
+    <string name="confMsj">Estos datos servirán para identificar a este dispositivo en la página web\nhttp:\\\\igconsultores.net\\raymundo\n</string>
     <string name="pswSetDebe">Debe contener sólo 4 números</string>
 </resources>
