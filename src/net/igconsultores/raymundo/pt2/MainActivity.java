@@ -507,14 +507,14 @@ public class MainActivity extends Activity {
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage("Salir de la aplicación?\n**Puedes presionar el botón \"HOME\" para cambiar de aplicación")
 		.setCancelable(false)
-		.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+		.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) {
 				finish();
 				//Toast.makeText(this, "Presiona la tecla de atrás para volver a la aplicación MobileHunt", Toast.LENGTH_LONG).show();
 			}
 		})
-		.setNegativeButton("No", new DialogInterface.OnClickListener() {
+		.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int id) { 
 				dialog.cancel();
