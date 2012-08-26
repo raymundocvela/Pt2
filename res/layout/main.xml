@@ -3,15 +3,18 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical">
-   
+    android:orientation="vertical" >
+
     <TextView
         android:id="@+id/mainTit_textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="5sp"
         android:text="@string/mainTit"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="25sp" android:padding="5sp" android:textStyle="bold" android:typeface="serif"/>
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
 
     <ScrollView
         android:id="@+id/scrollView1"
@@ -25,7 +28,8 @@
             android:addStatesFromChildren="true"
             android:baselineAligned="true"
             android:gravity="center_vertical|center_horizontal"
-            android:orientation="vertical" android:padding="5sp">
+            android:orientation="vertical"
+            android:padding="5sp" >
 
             <TextView
                 android:id="@+id/textView2MainLatiTxt"
@@ -33,7 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dip"
-                android:text="Esperando información....\nLatitud: " android:typeface="serif"/>
+                android:text="Esperando información....\nLatitud: "
+                android:typeface="serif" />
 
             <TextView
                 android:id="@+id/textView4MainLongTxt"
@@ -41,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dip"
-                android:text="Longitud :" android:typeface="serif"/>
+                android:text="Longitud :"
+                android:typeface="serif" />
 
             <TextView
                 android:id="@+id/textView1MainPres"
@@ -49,7 +55,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dip"
-                android:text="Presición:" android:typeface="serif"/>
+                android:text="Presición:"
+                android:typeface="serif" />
 
             <TextView
                 android:id="@+id/textView2MainTimes"
@@ -57,13 +64,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginLeft="20dip"
-                android:text="TimeStamp:" android:typeface="serif"/>
+                android:text="TimeStamp:"
+                android:typeface="serif" />
 
             <TextView
                 android:id="@+id/textViewMainModLoc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/MainModLoc" android:textSize="15sp" android:textStyle="bold" android:typeface="serif" android:padding="5dip"/>
+                android:padding="5dip"
+                android:text="@string/MainModLoc"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
 
             <RadioGroup
                 android:id="@+id/radioGroup1MainLoc"
@@ -76,49 +88,56 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="@string/mainGps" android:typeface="serif"/>
+                    android:text="@string/mainGps"
+                    android:typeface="serif" />
 
                 <RadioButton
                     android:id="@+id/radio1MainNw"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/mainNW" android:typeface="serif"/>
+                    android:text="@string/mainNW"
+                    android:typeface="serif" />
             </RadioGroup>
             <!--
             <Button
                 android:id="@+id/button1MainFtpUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Button" />
+                android:text="Button" />
             -->
-
+
             <TextView
                 android:id="@+id/textViewMainModo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingTop="5dip"
                 android:text="@string/mainModo"
-                android:textSize="15sp" android:textStyle="bold" android:typeface="serif" android:paddingTop="5dip"/>
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:typeface="serif" />
 
-<RadioGroup
-    android:id="@+id/radioGroupMainModo"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content" android:orientation="horizontal">
-
-    <RadioButton
-        android:id="@+id/radioMainPie"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:checked="true"
-        android:text="@string/mainPie" android:typeface="serif"/>
-
-    <RadioButton
-        android:id="@+id/radioMainAuto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/mainAuto" android:typeface="serif"/>
-</RadioGroup>
-<!-- 
+            <RadioGroup
+                android:id="@+id/radioGroupMainModo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
 
+                <RadioButton
+                    android:id="@+id/radioMainPie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/mainPie"
+                    android:typeface="serif" />
+
+                <RadioButton
+                    android:id="@+id/radioMainAuto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mainAuto"
+                    android:typeface="serif" />
+            </RadioGroup>
+            <!--
             <TextView
                 android:id="@+id/mainChgPsw_textView5"
                 android:layout_width="wrap_content"
@@ -127,15 +146,16 @@
                 android:gravity="center_vertical|center_horizontal"
                 android:text="@string/mainPsw"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="20sp" />
--->
-				<WebView                
+                android:textSize="20sp" />
+            -->
+
+
+            <WebView
                 android:id="@+id/webViewMainJs"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:visibility="gone"
-                />
-				                <!----> 
+                android:visibility="gone" />
+            <!--  -->
 
         </LinearLayout>
     </ScrollView>

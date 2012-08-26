@@ -273,6 +273,7 @@ public final class R {
         public static final int mainGps=0x7f070024;
         public static final int mainModo=0x7f070028;
         public static final int mainNW=0x7f070025;
+        public static final int mainOnlineNo=0x7f070036;
         public static final int mainPie=0x7f070026;
         public static final int mainPsw=0x7f070022;
         public static final int mainTit=0x7f07001d;
