@@ -37,11 +37,11 @@ public class SplashActivity extends Activity {
 				//if(!existe||prefs.getInt("psw", 9999)==1234){
 				if(prefs.contains("psw")&&prefs.contains("usr")){
 					finish();
-					//		        	Intent pswGetInt = new Intent().setClass(SplashActivity.this, PswGetActivity.class);
-					//		        	startActivity(pswGetInt);
-					//para fines practicos omitiremos el pedir contraseña en fase de pruebas
-					Intent mainInt = new Intent().setClass(SplashActivity.this, MainActivity.class);
-					startActivity(mainInt);
+					Intent pswGetInt = new Intent().setClass(SplashActivity.this, PswGetActivity.class);
+					startActivity(pswGetInt);
+
+/*					Intent mainInt = new Intent().setClass(SplashActivity.this, MainActivity.class);
+					startActivity(mainInt);*/
 				}
 				else {
 					// Muestras pantalla bienvenida
@@ -53,6 +53,6 @@ public class SplashActivity extends Activity {
 		};
 
 		Timer tm = new Timer();
-		tm.schedule(tmTsk, 3000);//en milisegundos
+		tm.schedule(tmTsk, 2000);//en milisegundos
 	}//Fin onCreate
 }//fin Activity

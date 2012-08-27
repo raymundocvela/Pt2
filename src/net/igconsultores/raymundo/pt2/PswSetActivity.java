@@ -104,10 +104,7 @@ public class PswSetActivity extends Activity {
 					Toast toast = Toast.makeText
 							(PswSetActivity.this, 
 									"Las contraseñas no coinciden" +
-									", Vuelve a intentarlo"+
-									etPsw1.getText()+
-									etPsw2.getText(),
-									Toast.LENGTH_LONG);
+									", Vuelve a intentarlo",Toast.LENGTH_LONG);
 					toast.show();
 					etPsw2.setText("");
 					etPsw2.requestFocus();
