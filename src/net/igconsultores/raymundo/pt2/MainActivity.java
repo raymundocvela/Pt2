@@ -141,7 +141,7 @@ public class MainActivity extends Activity {
 					String timeStamp=String.valueOf(location.getTime());
 
 					//imprimir datos en pantalla
-					tvLati.setText("Provedor:"+bestProv+"\nLatitud: " + laty);
+					tvLati.setText("Proveedor:"+bestProv+"\nLatitud: " + laty);
 					tvLong.setText("Longitud: " + lonx);
 					tvPres.setText("Precision: " + String.valueOf(location.getAccuracy()));			
 					Date date=new Date(location.getTime());
@@ -393,7 +393,7 @@ public class MainActivity extends Activity {
 			lastTime=String.valueOf(locationMobile.getTime());
 
 			//Imprimimos en pantalla
-			tvLati.setText("Provedor:"+bestProv+"\nlastLatitud: " + lastLaty );
+			tvLati.setText("Proveedor:"+bestProv+"\nlastLatitud: " + lastLaty );
 			tvLong.setText("lastLongitud: " + lastLonx);
 			tvPres.setText("Precision: " + String.valueOf(locationMobile.getAccuracy()));			
 			Date date=new Date(locationMobile.getTime());
